@@ -8,22 +8,11 @@ namespace Agenda
 {
     class Program
     {
-        List<Contact> Contacts = new List<Contact>();
-
         static void Main(string[] args)
         {
-            //eliminando todas las ramas 
+            //sg
+            // la primera prueba
+            //Holaaa
         }
-
-        public void AddContact(Contact contact)
-        {
-            Contacts.Add(contact);
-        }
-
-        public void RemoveContact(Contact contact)
-        {
-            Contacts.Remove(contact);
-        }
-
     }
 }
