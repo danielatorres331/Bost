@@ -10,9 +10,18 @@ namespace Agenda
     {
         static void Main(string[] args)
         {
-            //sg
-            // la primera prueba
-            //Holaaa
+          
         }
+
+        public void AddContact(Contact contact)
+        {
+            Contacts.Add(contact);
+        }
+
+        public void RemoveContact(Contact contact)
+        {
+            Contacts.Remove(contact);
+        }
+
     }
 }
