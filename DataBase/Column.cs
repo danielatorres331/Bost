@@ -8,7 +8,7 @@ namespace DataBase
 {
     public class Column
     {
-        public Column(string name, string datatype)
+        public Column(string name)
         {
 
         }
