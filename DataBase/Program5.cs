@@ -4,16 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Agenda
+namespace DataBase
 {
-    class Program
+    class Program5
     {
-        List<Contact> Contacts = new List<Contact>();
-
         static void Main(string[] args)
+            //bases de datos_
         {
-          
         }
-
     }
 }
