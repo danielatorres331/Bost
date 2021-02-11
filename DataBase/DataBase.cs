@@ -6,7 +6,30 @@ using System.Threading.Tasks;
 
 namespace DataBase
 {
-    class DataBase
+   public class DataBase
     {
+       List<Table> tables;
+
+        public DataBase(string name, string userName, string password)
+        { 
+        }
+        public void DropTable () 
+        {
+
+        }
+        public DataBase GetDatabase()
+        {
+            return this;
+        }
+
+        public void AddTable(Table table)
+        {
+            tables.Add (table);
+        }
+
+        public void UpdateDatabase()
+        { 
+        }
+
     }
 }
