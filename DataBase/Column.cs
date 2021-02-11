@@ -22,5 +22,12 @@ namespace DataBase
         {
             return null;
         }
+
+        public void UpdateColumn()
+        {
+
+        }
+
+        public String GetName(String )
     }
 }
