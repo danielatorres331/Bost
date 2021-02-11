@@ -7,8 +7,33 @@ namespace UnitTests
     public class TableTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TestTable()
         {
         }
+        [TestMethod]
+        public void TestAddColumn()
+        {
+        }
+        [TestMethod]
+        public void TestDeleteColumn()
+        {
+        }
+        [TestMethod]
+        public void TestUpdateColumn()
+        {
+        }
+        [TestMethod]
+        public void TestGetColumn()
+        {
+        }
+        [TestMethod]
+        public void TestAddRow()
+        {
+        }
+        [TestMethod]
+        public void TestGetTable()
+        {
+        }
+        
     }
 }
