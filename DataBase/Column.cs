@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataBase
 {
-    class Column
+    public class Column
     {
     }
 }
