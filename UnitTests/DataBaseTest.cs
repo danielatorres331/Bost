@@ -7,8 +7,26 @@ namespace UnitTests
     public class DataBaseTest
     {
         [TestMethod]
-        public void TestMethod1()
+        [TestMethod]
+        public void TestDataBase()
         {
         }
+
+        [TestMethod]
+        public void TestDropTable()
+        {
+        }
+        [TestMethod]
+        public void TestGetDataBase()
+        {
+        }
+        [TestMethod]
+        public void TestAddTable()
+        {
+        }
+        [TestMethod]
+        public void TestUpdateTable()
+        {
+        }
+
     }
-}
