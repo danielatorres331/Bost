@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace DataBase
 {
-    class Column
+    public class Column
     {
-    }
+        public Column (string name, string datatype)
+        {
+
+        }
+
+        public Column GetValue(Column col)
+        {
+            return null;
+        }
+
+        public Column GetValues()
+        { 
+        }
 }
