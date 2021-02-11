@@ -8,17 +8,19 @@ namespace DataBase
 {
     public class Column
     {
-        public Column (string name, string datatype)
+        public Column(string name, string datatype)
         {
 
         }
 
-        public Column GetValue(Column col)
+        public String GetValue(String value)
         {
             return null;
         }
 
-        public Column GetValues()
-        { 
+        public List<String> GetValues(String value)
+        {
+            return null;
         }
+    }
 }
