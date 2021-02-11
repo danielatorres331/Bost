@@ -9,7 +9,6 @@ namespace DataBase
    public class DataBase
     {
        List<Table> tables;
-
         public DataBase(string name, string userName, string password)
         { 
         }
