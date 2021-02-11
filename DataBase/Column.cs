@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataBase
 {
-    class Program5
+    class Column
     {
-        static void Main(string[] args)
-            //cambios
-        {
-        }
     }
 }
