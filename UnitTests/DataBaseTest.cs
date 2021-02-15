@@ -18,19 +18,16 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void TestGetDataBase()
-        {
-        }
-
-        [TestMethod]
         public void TestAddTable()
         {
         }
 
+        /*
         [TestMethod]
         public void TestUpdateTable()
         {
         }
+        */
 
         [TestMethod]
         public void TestSearchTableByName()

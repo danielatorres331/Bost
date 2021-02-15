@@ -12,7 +12,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void TestCreateColumn()
+        public void TestAddColumn()
         {
         }
 
@@ -21,10 +21,12 @@ namespace UnitTests
         {
         }
 
+        /*
         [TestMethod]
         public void TestUpdateTable()
         {
         }
+        */
 
         [TestMethod]
         public void TestGetColumn()
