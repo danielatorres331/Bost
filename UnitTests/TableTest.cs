@@ -10,28 +10,39 @@ namespace UnitTests
         public void TestTable()
         {
         }
+
         [TestMethod]
-        public void TestAddColumn()
+        public void TestCreateColumn()
         {
         }
+
         [TestMethod]
         public void TestDeleteColumn()
         {
         }
+
         [TestMethod]
-        public void TestUpdateColumn()
+        public void TestUpdateTable()
         {
         }
+
         [TestMethod]
         public void TestGetColumn()
         {
         }
+
         [TestMethod]
         public void TestAddRow()
         {
         }
+
         [TestMethod]
         public void TestGetTable()
+        {
+        }
+
+        [TestMethod]
+        public void TestSearchColumnByName()
         {
         }
         
