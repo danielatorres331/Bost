@@ -8,5 +8,44 @@ namespace DataBase
 {
     public class Table
     {
+        public String Name;
+        public List<Column> Columns = new List<Column>();
+
+        Table(String name, List<Column> columns)
+        {
+            Name = name;
+            Columns = columns;
+        }
+
+        public void AddColumn(Column column)
+        {
+            Columns.Add(column);
+        }
+
+        public void DeleteColumn(Column column)
+        {
+                
+        }
+
+        public void UpdateTable()
+        {
+
+        }
+
+        public Column GetColumn(String name) 
+        {
+            return null;
+        }
+
+        public void AddRow()
+        {
+            
+        }
+
+        public Table GetTable()
+        {
+            return this;
+        }
+
     }
 }
