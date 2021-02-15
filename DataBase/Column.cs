@@ -24,9 +24,9 @@ namespace DataBase
         }
 
 
-        public Column GetName()
+        public String GetName()
         {
-            return this;
+            return null;
         }
 
         public Column GetColumn()
@@ -34,7 +34,7 @@ namespace DataBase
             return this;
         }
 
-        public void DeleteValue()
+        public void DeleteValue(int index)
         {
 
         }

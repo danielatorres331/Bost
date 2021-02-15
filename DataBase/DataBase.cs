@@ -16,10 +16,6 @@ namespace DataBase
         {
 
         }
-        public DataBase GetDatabase()
-        {
-            return this;
-        }
 
         public void AddTable(Table table)
         {

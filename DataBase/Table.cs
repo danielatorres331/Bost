@@ -24,7 +24,7 @@ namespace DataBase
 
         public void DeleteColumn(Column column)
         {
-                
+            Columns.Remove(column);
         }
 
         public void UpdateTable()
