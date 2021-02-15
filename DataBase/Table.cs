@@ -47,5 +47,9 @@ namespace DataBase
             return this;
         }
 
+        public Column SearchColumnByName(String name)
+        {
+            return null;
+        }
     }
 }
