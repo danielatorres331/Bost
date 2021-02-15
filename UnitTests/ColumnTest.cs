@@ -22,11 +22,6 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void TestUpdateColumn()
-        {
-        }
-
-        [TestMethod]
         public void TestGetName()
         {
         }
@@ -38,6 +33,16 @@ namespace UnitTests
 
         [TestMethod]
         public void TestDeleteValue()
+        {
+        }
+
+        [TestMethod]
+        public void TestSetValue()
+        {
+        }
+
+        [TestMethod]
+        public void TestAddValue()
         {
         }
     }
