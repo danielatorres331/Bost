@@ -23,10 +23,6 @@ namespace DataBase
             return null;
         }
 
-        public void UpdateColumn()
-        {
-
-        }
 
         public Column GetName()
         {
@@ -42,6 +38,15 @@ namespace DataBase
         {
 
         }
+        
+        public void SetValue()
+        {
 
+        }
+
+        public void AddValue()
+        { 
+        
+        }
     }
 }
