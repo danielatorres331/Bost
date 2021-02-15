@@ -29,6 +29,9 @@ namespace DataBase
         public void UpdateDatabase()
         { 
         }
-
+        public Table SearchTableByName(String name)
+        {
+            return null;
+        }
     }
 }
