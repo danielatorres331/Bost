@@ -6,7 +6,7 @@ namespace UnitTests
     [TestClass]
     public class DataBaseTest
     {
-        [TestMethod]
+   
         [TestMethod]
         public void TestDataBase()
         {
@@ -16,17 +16,24 @@ namespace UnitTests
         public void TestDropTable()
         {
         }
+
         [TestMethod]
         public void TestGetDataBase()
         {
         }
+
         [TestMethod]
         public void TestAddTable()
         {
         }
+
         [TestMethod]
         public void TestUpdateTable()
         {
         }
 
+        [TestMethod]
+        public void TestSearchTableByName()
+        {
+        }
     }
