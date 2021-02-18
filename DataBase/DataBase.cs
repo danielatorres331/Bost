@@ -9,7 +9,7 @@ namespace DataBase
    public class DataBase
     {
         //List for storing the tables
-       List<Table>Tables;
+       List<Table>Tables=null;
         String Name;
         String UserName;
         String Password;
