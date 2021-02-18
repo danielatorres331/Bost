@@ -22,6 +22,7 @@ namespace UnitTests
         {
             
         }
+        */
 
         [TestMethod]
         public void TestGetName()
@@ -47,6 +48,11 @@ namespace UnitTests
 
         [TestMethod]
         public void TestAddValue()
+        {
+        }
+
+        [TestMethod]
+        public void TestGetIndex()
         {
         }
     }
