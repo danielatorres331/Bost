@@ -13,8 +13,9 @@ namespace UnitTests
             Assert.IsNotNull(table1);
 
         }
+
         [TestMethod]
-        public void TestAddColumn()
+        public void TestCreateColumn()
         {
             Table table2 = new Table("Table2");
             Column column1 = new Column("Column1");
@@ -22,6 +23,7 @@ namespace UnitTests
             Assert.Equals(column1, table2.SearchColumnByName("Column1"));
 
         }
+
         [TestMethod]
         public void TestDeleteColumn()
         {
@@ -37,12 +39,19 @@ namespace UnitTests
         {
 
         }
+
         [TestMethod]
         public void TestAddRow()
         {
         }
+
         [TestMethod]
         public void TestGetTable()
+        {
+        }
+
+        [TestMethod]
+        public void TestSearchColumnByName()
         {
         }
         
