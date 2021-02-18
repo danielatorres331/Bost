@@ -5,11 +5,10 @@ namespace UnitTests
 {
     [TestClass]
     public class DataBaseTest
-    {
+    { 
         [TestMethod]
         public void TestDataBase()
-        {
-        
+        {        
             DataBase db1 = new DataBase("DataBase1",Bost,contraseña);        
             Assert.IsNotNull(db1);
         }
@@ -23,6 +22,7 @@ namespace UnitTests
             Assert.IsNull(table1);
 
         }
+       
         [TestMethod]
         public void TestAddTable()
         {
@@ -32,6 +32,7 @@ namespace UnitTests
             Assert.Equals(table2 , db.getTableByName("Table2"));
 
         }
+
         [TestMethod]
         public void TestSeachTableByName()
         {
@@ -41,5 +42,4 @@ namespace UnitTests
             Assert.Equals(table3, db.getTableByName("Table3"));
 
         }
-
     }
