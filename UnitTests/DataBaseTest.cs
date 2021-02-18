@@ -18,6 +18,7 @@ namespace UnitTests
         {
             DataBase db2 = new DataBase("DataBase2", Bost, contraseña);
             Table table1 = new Table("Table1");
+            db2.AddTable(table1);
             db2.DropTable(table1);
             Assert.IsNull(table1);
 
