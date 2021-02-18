@@ -9,28 +9,37 @@ namespace DataBase
    public class DataBase
     {
         //List for storing the tables
-       List<Table> tables;
+       List<Table>Tables;
+        String Name;
+        String UserName;
+        String Password;
 
         //Constructor
         public DataBase(String name, String userName, String password)
-        { 
+        {
+            Name = name;
+            UserName = userName;
+            Password = password;
         }
 
         //Delete a table
         public void DropTable (Table table) 
         {
-
+            Tables.Remove(table);
         }
 
         //Adds a table to the DataBase
         public void AddTable(Table table)
         {
-            tables.Add (table);
+            Tables.Add (table);
         }
 
         //Search a table by name
         public Table SearchTableByName(String name)
         {
+            foreach (Table table in Tables)
+            { 
+            }
             return null;
         }
     }
