@@ -27,18 +27,12 @@ namespace DataBase
             Columns.Add(column);
         }
 
-        //Deletes a column from the table
-        public void DeleteColumn(Column column)
+        //Deletes a column from the table by name
+        public void DeleteColumn(String name)
         {
             Columns.Remove(column);
         }
 
-        /*
-        public void UpdateTable()
-        {
-
-        }
-        */
 
         //Returns the column whose index is passed by parameter
         public Column GetColumn(int index) 
@@ -50,12 +44,6 @@ namespace DataBase
         public void AddRow(List<String> values)
         {
             
-        }
-
-        //Returns this table
-        public Table GetTable()
-        {
-            return this;
         }
 
         //Returns the column whose name is passed by parameter

@@ -39,12 +39,6 @@ namespace DataBase
             return null;
         }
 
-        //Returns the columns object
-        public Column GetColumn()
-        {
-            return this;
-        }
-
         //Deletes the value of the position passed by parameter
         public void DeleteValue(int index)
         {

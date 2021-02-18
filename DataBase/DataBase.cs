@@ -28,12 +28,6 @@ namespace DataBase
             tables.Add (table);
         }
 
-        /*
-        public void UpdateDatabase()
-        { 
-        }
-        */
-
         //Search a table by name
         public Table SearchTableByName(String name)
         {
