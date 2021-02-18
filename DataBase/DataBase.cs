@@ -37,10 +37,16 @@ namespace DataBase
         //Search a table by name
         public Table SearchTableByName(String name)
         {
+            Table tab = null;
             foreach (Table table in Tables)
-            { 
+            {
+                if (table.GetName() == name)
+                {
+                    tab = table;
+                    break; 
+                }
             }
-            return null;
+            return tab;
         }
     }
 }
