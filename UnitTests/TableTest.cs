@@ -29,20 +29,25 @@ namespace UnitTests
         {
             Table table3 = new Table("Table3");
             Column column2 = new Column("Column2");
-            table2.AddColumn(column2);
-            table2.DeleteColumn(column2);
-            Assert.IsNull(table2.SearchColumnByName("Column2"));
+            table3.AddColumn(column2);
+            table3.DeleteColumn(column2);
+            Assert.IsNull(table3.SearchColumnByName("Column2"));
         }
         
         [TestMethod]
         public void TestGetColumn()
         {
+            Table table4 = new Table("Table4");
+            Column column3 = new Column("Column3");
+            table4.AddColumn(column3);
+            Assert.Equals("Column3", table4.getColumn(0));
 
         }
 
         [TestMethod]
         public void TestAddRow()
         {
+          
         }
 
         [TestMethod]
