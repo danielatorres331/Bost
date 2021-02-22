@@ -21,13 +21,6 @@ namespace UnitTests
         {
         }
 
-        /*
-        [TestMethod]
-        public void TestUpdateTable()
-        {
-        }
-        */
-
         [TestMethod]
         public void TestGetColumn()
         {
