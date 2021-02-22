@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataBase
+namespace BostDB
 {
     public class Table
     {
@@ -12,13 +12,13 @@ namespace DataBase
         public String Name;
 
         //List of columns in the table
-        public List<Column> Columns = new List<Column>();
+        public List<Column> Columns;
 
         //Constructor
-        public Table(String name, List<Column> columns)
+        public Table(String name)
         {
             Name = name;
-            Columns = columns;
+            Columns = new List<Column>();
         }
 
         //Adds a column to the table
@@ -30,26 +30,51 @@ namespace DataBase
         //Deletes a column from the table by name
         public void DeleteColumn(String name)
         {
-            Columns.Remove(column);
+            Columns.Remove(SearchColumnByName(name));
         }
 
 
         //Returns the column whose index is passed by parameter
         public Column GetColumn(int index) 
         {
-            return null;
+            return Columns[index];
+        }
+
+        public String GetName()
+        {
+            return Name;
         }
 
         //Adds the values of the list passed by parameter to the columns of the table
         public void AddRow(List<String> values)
         {
-            
+            for(int i=0; i < Columns.Count; i++)
+            {
+                if(i < values.Count) //If values has more values
+                {
+                    Columns[i].AddValue(values[i]);
+                }
+                else //If there are less values than columns
+                {
+                    Columns[i].AddValue(null);
+                }
+            }
+
         }
 
         //Returns the column whose name is passed by parameter
         public Column SearchColumnByName(String name)
         {
-            return null;
+            Column column1 = null;
+            foreach(Column column in Columns)
+            {
+                if(column.GetName() == name)
+                {
+                    column1 = column;
+                    break;
+                }
+            }
+            return column1;
         }
     }
 }
