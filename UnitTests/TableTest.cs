@@ -15,7 +15,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void TestCreateColumn()
+        public void TestAddColumn()
         {
             Table table2 = new Table("Table2");
             Column column1 = new Column("Column1");
