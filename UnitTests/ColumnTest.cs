@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using BostDB;
+using System.Collections.Generic;
 
 namespace UnitTests
 {
