@@ -26,8 +26,8 @@ namespace UnitTests
         [TestMethod]
         public void TestGetValue()
         {
-            string value1 = ValuesList.GetValue(1);
-            string value2 =ValuesList.GetValue(2);
+            string value1 = ValuesList.GetValue(0);
+            string value2 =ValuesList.GetValue(1);
             Assert.AreEqual(value1, "value1");
             Assert.AreEqual(value2, "value2");
         }
@@ -42,37 +42,33 @@ namespace UnitTests
         [TestMethod]
         public void TestDeleteValue()
         {
-            ValuesList.DeleteValue(3);
-            Column c1 = new Column("column1");
-            c1.AddValue("value1");
-            c1.AddValue("value2");
-            Assert.AreEqual(ValuesList, c1);
-           
+            ValuesList.DeleteValue(0);
+            Assert.AreEqual("value2", ValuesList.GetValue(0));
         }
 
         [TestMethod]
         public void TestSetValue()
         {
-            ValuesList.SetValue(2, "newValueName");
             Column c2 = new Column("column1");
             c2.AddValue("value1");
-            c2.AddValue("newValueName");
+            c2.AddValue("value2");
             c2.AddValue("value3");
-            Assert.AreEqual(c2, ValuesList);
-           // Assert.AreEqual("newValueName", ValuesList.GetValue(2));
+            c2.SetValue(2, "newValue");
+            Assert.AreEqual("newValue", c2.GetValue(2));
         }
 
         [TestMethod]
         public void TestAddValue()
         {
             ValuesList.AddValue("newValue");
-            Assert.AreEqual("newValue", ValuesList.GetValue(4));
+            Assert.AreEqual("newValue", ValuesList.GetValue(3));
         }
 
         [TestMethod]
         public void TestGetIndex()
         {
-            Assert.AreEqual(2, ValuesList.GetIndex("value2"));
+            Assert.AreEqual(0, ValuesList.GetIndex("value1"));
+            Assert.AreEqual(1, ValuesList.GetIndex("value2"));
         }
     }
 }

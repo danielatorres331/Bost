@@ -23,15 +23,8 @@ namespace BostDB
         //Returns the value of the position specified by parameter
         public String GetValue(int index)
         {
-            return ValuesList[index-1];
+            return ValuesList[index];
         }
-
-        /*
-        public List<String> GetValues(String value)
-        {
-            return null;
-        }
-        */
 
         //Returns the name of the column
         public String GetName()
@@ -42,7 +35,7 @@ namespace BostDB
         //Deletes the value of the position passed by parameter
         public void DeleteValue(int index)
         {
-           ValuesList.RemoveAt(index-1);
+           ValuesList.RemoveAt(index);
         }
         
         //Change the value of the index position to newValue
