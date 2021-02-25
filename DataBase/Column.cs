@@ -42,7 +42,7 @@ namespace BostDB
         //Deletes the value of the position passed by parameter
         public void DeleteValue(int index)
         {
-           ValuesList.RemoveAt(index-1);
+           ValuesList.RemoveAt(index);
         }
         
         //Change the value of the index position to newValue

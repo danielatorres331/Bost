@@ -42,7 +42,7 @@ namespace UnitTests
         [TestMethod]
         public void TestDeleteValue()
         {
-            ValuesList.DeleteValue(3);
+            ValuesList.DeleteValue(2);
             Column c1 = new Column("column1");
             c1.AddValue("value1");
             c1.AddValue("value2");
@@ -72,7 +72,7 @@ namespace UnitTests
         [TestMethod]
         public void TestGetIndex()
         {
-            Assert.AreEqual(2, ValuesList.GetIndex("value2"));
+            Assert.AreEqual(1, ValuesList.GetIndex("value2"));
         }
     }
 }
