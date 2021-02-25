@@ -9,7 +9,7 @@ namespace BostDB
    public class DataBase
     {
         //List for storing the tables
-       List<Table>Tables=null;
+       List<Table>Tables= new List<Table>();
         String Name;
         String UserName;
         String Password;
@@ -23,7 +23,7 @@ namespace BostDB
         }
 
         //Delete a table
-        public void DropTable (Table table) 
+        public void RemoveTable (Table table) 
         {
             Tables.Remove(table);
         }
