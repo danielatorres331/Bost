@@ -21,8 +21,11 @@ namespace UnitTests
         {
             Table table2 = new Table("Table2");
             Column column1 = new Column("Column1");
+            Column column2 = new Column("Column2");
             table2.AddColumn(column1);
+            table2.AddColumn(column2);
             Assert.AreEqual(column1, table2.SearchColumnByName("Column1"));
+            Assert.AreEqual(column2, table2.SearchColumnByName("Column2"));
 
         }
 
@@ -41,8 +44,11 @@ namespace UnitTests
         {
             Table table4 = new Table("Table4");
             Column column3 = new Column("Column3");
+            Column column4 = new Column("Column4");
             table4.AddColumn(column3);
+            table4.AddColumn(column4);
             Assert.AreEqual(column3, table4.GetColumn(0));
+            Assert.AreEqual(column4, table4.GetColumn(1));
 
         }
 
@@ -58,8 +64,10 @@ namespace UnitTests
             tableRow.AddColumn(columnRow1);
             tableRow.AddColumn(columnRow2);
             tableRow.AddRow(values);
+            columnRow1.AddValue("value3");
             int index = columnRow1.GetIndex("value1");
             Assert.AreEqual("value1", columnRow1.GetValue(index));
+
         }
 
         [TestMethod]
