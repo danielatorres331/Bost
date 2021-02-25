@@ -10,7 +10,7 @@ namespace UnitTests
     {
         Column ValuesList = new Column("cName");
 
-        public ColumnTest(String name)
+        public ColumnTest()
         { 
             ValuesList.AddValue("value1");
             ValuesList.AddValue("value2");
