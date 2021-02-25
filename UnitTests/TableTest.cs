@@ -22,7 +22,7 @@ namespace UnitTests
             Table table2 = new Table("Table2");
             Column column1 = new Column("Column1");
             table2.AddColumn(column1);
-            Assert.Equals(column1, table2.SearchColumnByName("Column1"));
+            Assert.AreEqual(column1, table2.SearchColumnByName("Column1"));
 
         }
 
