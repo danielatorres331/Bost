@@ -42,7 +42,7 @@ namespace UnitTests
             Table table4 = new Table("Table4");
             Column column3 = new Column("Column3");
             table4.AddColumn(column3);
-            Assert.Equals("Column3", table4.GetColumn(0));
+            Assert.AreEqual(column3, table4.GetColumn(0));
 
         }
 
@@ -66,7 +66,7 @@ namespace UnitTests
         public void TestGetName()
         {
             Table table6 = new Table("Table6");
-            Assert.Equals("Table6", table6.GetName());
+            Assert.AreEqual("Table6", table6.GetName());
 
          }
 
