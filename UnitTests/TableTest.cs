@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using BostDB;
+using System.Collections.Generic;
 
 namespace UnitTests
 {
@@ -48,7 +49,17 @@ namespace UnitTests
         [TestMethod]
         public void TestAddRow()
         {
-          
+            List<String> values = new List<string>();
+            values.Add("value1");
+            values.Add("value2");
+            Table tableRow = new Table("TableRow");
+            Column columnRow1 = new Column("ColumnRow");
+            Column columnRow2 = new Column("ColumnRow");
+            tableRow.AddColumn(columnRow1);
+            tableRow.AddColumn(columnRow2);
+            tableRow.AddRow(values);
+            int index = columnRow1.GetIndex("value1");
+            Assert.AreEqual("value1", columnRow1.GetValue(index));
         }
 
         [TestMethod]
@@ -62,6 +73,10 @@ namespace UnitTests
         [TestMethod]
         public void TestSearchColumnByName()
         {
+            Table table7 = new Table("Table7");
+            Column column4 = new Column("Column4");
+            table7.AddColumn(column4);
+            Assert.AreEqual(column4, table7.SearchColumnByName("Column4"));
 
         }
         
