@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -75,6 +76,16 @@ namespace DataBase
                 }
             }
             return column1;
+        }
+
+        public void Save(string folder)
+        {
+           
+            foreach(Column column in Columns)
+            {
+                //añadir para que se guarde en el folder
+                File.WriteAllText(column.GetName() + ".txt", column.Save());
+            }
         }
     }
 }
