@@ -17,13 +17,13 @@ namespace DataBase
         //Constructor
         public Column(String name)
         {
-
+            Name = name;
         }
 
         //Returns the value of the position specified by parameter
         public String GetValue(int index)
         {
-            return null;
+            return ValuesList[index];
         }
 
         /*
@@ -36,30 +36,49 @@ namespace DataBase
         //Returns the name of the column
         public String GetName()
         {
-            return null;
+            return Name;
         }
 
         //Deletes the value of the position passed by parameter
         public void DeleteValue(int index)
         {
-
+           ValuesList.RemoveAt(index);
         }
         
         //Change the value of the index position to newValue
         public void SetValue(int index, String newValue)
         {
-
+            ValuesList[index] = newValue;
         }
 
         //Adds a new value to the column
         public void AddValue(String newValue)
-        { 
-        
+        {
+            ValuesList.Add(newValue);
         }
 
         //Returns the index os the column whose value is the one passed by parameter
         public int GetIndex(String value)
         {
+            int i;
+            for ( i = 0; i< ValuesList.Count; i++)
+            {
+                if (ValuesList[i] == value) 
+                {
+                    break;
+                }      
+            }
+            return i;
+        }
+
+        public string Save() {
+            string text = null;
+            foreach (string value in ValuesList)
+            {
+                text = value + "~";
+            }
+
+            return text;
         }
     }
 }
