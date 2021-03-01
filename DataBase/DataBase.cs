@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,5 +49,19 @@ namespace DataBase
             }
             return tab;
         }
+
+        public void Load(string filename)
+        {
+            string text = File.ReadAllText(filename);
+            string[] values = text.Split(new char[] {'~'});
+        }
+
+        public void Save(string filename)
+        {
+            
+
+        }
     }
+
+   
 }
