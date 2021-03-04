@@ -45,6 +45,10 @@
   <ItemGroup>
     <Compile Include="Column.cs" />
     <Compile Include="DataBase.cs" />
+    <Compile Include="MiniSqlParser\IQuery.cs" />
+    <Compile Include="MiniSqlParser\Parser.cs" />
+    <Compile Include="MiniSqlParser\SelectAll.cs" />
+    <Compile Include="MiniSqlParser\SelectWhere.cs" />
     <Compile Include="Program5.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Table.cs" />
