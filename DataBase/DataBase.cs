@@ -61,6 +61,14 @@ namespace DataBase
             
 
         }
+        public string GetName()
+        {
+            return Name;
+        }
+        public int GetNumTable()
+        {
+            return Tables.Count;
+        }
         
     }
 
