@@ -34,7 +34,6 @@ namespace DataBase
             Columns.Remove(SearchColumnByName(name));
         }
 
-
         //Returns the column whose index is passed by parameter
         public Column GetColumn(int index) 
         {
@@ -80,11 +79,12 @@ namespace DataBase
 
         public void Save(string folder)
         {
-           
             foreach(Column column in Columns)
             {
-                //añadir para que se guarde en el folder
-                File.WriteAllText(column.GetName() + ".txt", column.Save());
+                string txtName = column.GetName() + ".txt";
+                string pathString = System.IO.Path.Combine(folder, txtName);
+                //(path, content)
+                File.WriteAllText(pathString, column.Save());
             }
         }
     }
