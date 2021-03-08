@@ -46,6 +46,27 @@ namespace UnitTests
         }
 
         [TestMethod]
+        public void TestGetName()
+        {
+            DataBase db = new DataBase("myDatabaseName", "Bost", "password");
+            Assert.IsNotNull(db.GetName());
+            Assert.AreEqual("myDatabaseName", db.GetName());
+        }
+
+        [TestMethod]
+        public void TestGetNumTables()
+        {
+            DataBase db = new DataBase ("myDatabaseName", "Bost", "password");
+            Table t1 = new Table("myTable1");
+            Table t2 = new Table("myTable2");
+            db.AddTable(t1);
+            db.AddTable(t2);
+
+            Assert.AreEqual(2, db.GetNumTables());
+
+        }
+
+        [TestMethod]
         public void TestSave()
         {
             DataBase db5 = new DataBase("DataBase5", "Bost", "password");
@@ -60,8 +81,8 @@ namespace UnitTests
             t5.AddColumn(c5);
             t5.AddColumn(c6);
             t6.AddColumn(c6);
-
             db5.AddTable(t5);
+            db5.AddTable(t6);
 
             db5.Save("dbTest.txt");
 
@@ -70,7 +91,11 @@ namespace UnitTests
 
             Assert.AreEqual("DataBase5", db6.GetName());
             Assert.AreEqual(2, db6.GetNumTables());
-
+            Assert.AreEqual("Table6", t6.GetName());
+            Assert.AreEqual(2, t5.GetNumColumns());
+            Assert.AreEqual("Column5", c5.GetName());
+            Assert.AreEqual("bat", c5.GetValue(0));
+            Assert.AreEqual("badger", c6.GetValue(1));
 
         }
 
