@@ -76,5 +76,9 @@ namespace BostDB
             }
             return column1;
         }
+        public int getNumColumns() {
+
+            return Columns.Count;
+        }
     }
 }
