@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataBase
+namespace BostDB
 {
     public class Table
     {
@@ -43,6 +43,12 @@ namespace DataBase
         public String GetName()
         {
             return Name;
+            return Columns[index];
+        }
+
+        public String GetName()
+        {
+            return Name;
         }
 
         //Adds the values of the list passed by parameter to the columns of the table
@@ -65,6 +71,20 @@ namespace DataBase
         //Returns the column whose name is passed by parameter
         public Column SearchColumnByName(String name)
         {
+            Column column1 = null;
+            foreach(Column column in Columns)
+            {
+                if(column.GetName() == name)
+                {
+                    column1 = column;
+                    break;
+                }
+            }
+            return column1;
+        }
+        public int getNumColumns() {
+
+            return Columns.Count;
             Column column1 = null;
             foreach(Column column in Columns)
             {
