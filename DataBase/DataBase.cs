@@ -52,7 +52,7 @@ namespace DataBase
             }
             return tab;
         }
-        //
+        // Load database : path, file
         public void Load(string nameDB)
         {
             string dbName = System.IO.Path.Combine(@"/Folder", nameDB);
