@@ -8,6 +8,9 @@ namespace DataBase.MiniSqlParser
 {
     public class SelectWhere : IQuery
     {
-        
+        public string Run(DataBase database) 
+        {
+            return null;
+        }
     }
 }

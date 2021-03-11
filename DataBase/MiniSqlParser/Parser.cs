@@ -11,9 +11,11 @@ namespace DataBase.MiniSqlParser
     {
         public static IQuery Parse(string miniSqlSentence)
         {
-           // const string selectAllPattern.=@"SELECT \* FROM([a-zA-Z0-9]+)";
+           const string selectAllPattern = @"SELECT \* FROM([a-zA-Z0-9]+)";
 
-          //  Math match = Regex.Match(miniSqlSentence, selectAllPattern);
+           Match match = Regex.Match(miniSqlSentence, selectAllPattern);
+
+
             return null;
         }
     }
