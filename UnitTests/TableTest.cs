@@ -112,21 +112,26 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void GetColumns()
+        public void TestGetColumns()
         {
-            Table t = new Table("TName");
+            Table t = new Table("Fruits");
             Column fc = new Column("FirstColumn");
             Column sc = new Column("SecondColumn");
+            fc.AddValue("Banana");
+            sc.AddValue("Peach");
             t.AddColumn(fc);
             t.AddColumn(sc);
 
-            Table t2 = new Table("TName2");
-            Column fc2 = new Column("FirstColumn2");
-            Column sc2 = new Column("SecondColumn2");
-            t.AddColumn(fc2);
-            t.AddColumn(sc2);
+            List<Column> columnsTable = new List<Column>();
+            columnsTable = t.GetColumns();
 
-            Assert.AreEqual(t.GetColumns(), t2.GetColumns());
+            Assert.IsTrue(columnsTable.Contains(fc));
+            Assert.IsTrue(columnsTable.Contains(sc));
+
+            Assert.AreEqual(2, columnsTable.Count);
+
+
+
         }
 
         [TestMethod]

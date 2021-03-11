@@ -62,15 +62,6 @@ namespace BostDB
                 }      
             }
             return i;
-            int i;
-            for ( i = 0; i< ValuesList.Count; i++)
-            {
-                if (ValuesList[i] == value) 
-                {
-                    break;
-                }      
-            }
-            return i;
         }
 
         public string Save() {
