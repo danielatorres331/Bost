@@ -95,7 +95,7 @@ namespace UnitTests
             Column column2 = new Column("Column2");
             table8.AddColumn(column1);
             table8.AddColumn(column2);
-            Assert.AreEqual(2, table8.getNumColumns());
+            Assert.AreEqual(2, table8.GetNumColumns());
 
 
             Table table9 = new Table("Table9");
@@ -105,12 +105,55 @@ namespace UnitTests
             table9.AddColumn(column3);
             table9.AddColumn(column4);
             table9.AddColumn(column5);
-            Assert.AreEqual(3, table9.getNumColumns());
+            Assert.AreEqual(3, table9.GetNumColumns());
 
             Table table10 = new Table("Table10");
-            Assert.AreEqual(0, table10.getNumColumns());
+            Assert.AreEqual(0, table10.GetNumColumns());
         }
 
+        [TestMethod]
+        public void GetColumns()
+        {
+            Table t = new Table("TName");
+            Column fc = new Column("FirstColumn");
+            Column sc = new Column("SecondColumn");
+            t.AddColumn(fc);
+            t.AddColumn(sc);
+
+            Table t2 = new Table("TName2");
+            Column fc2 = new Column("FirstColumn2");
+            Column sc2 = new Column("SecondColumn2");
+            t.AddColumn(fc2);
+            t.AddColumn(sc2);
+
+            Assert.AreEqual(t.GetColumns(), t2.GetColumns());
+        }
+
+        [TestMethod]
+        public void TestSelect()
+        {
+            Table table10 = new Table("TableName");
+            Column c1 = new Column("c1");
+            Column c2 = new Column("c2");
+            table10.AddColumn(c1);
+            table10.AddColumn(c2);
+
+
+
+
+    }
+
+        [TestMethod]
+        public void TestSelectAll()
+        {
+            Table table11 = new Table("TableName");
+            Column c11 = new Column("c11");
+            Column c22 = new Column("c22");
+            table11.AddColumn(c11);
+            table11.AddColumn(c22);
+
+            
+        }
 
     }
 }
