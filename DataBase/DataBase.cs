@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace DataBase
 {
-   public class DataBase
+    public class DataBase
     {
         //List for storing the tables
-       List<Table>Tables=null;
+        List<Table> Tables = null;
         String Name;
         String UserName;
         String Password;
+        string pathString;
 
         //Constructor
         public DataBase(String name, String userName, String password)
@@ -21,10 +22,11 @@ namespace DataBase
             Name = name;
             UserName = userName;
             Password = password;
+            pathString = @"/Folder";
         }
 
         //Delete a table
-        public void DropTable (Table table) 
+        public void DropTable(Table table)
         {
             Tables.Remove(table);
         }
@@ -32,7 +34,7 @@ namespace DataBase
         //Adds a table to the DataBase
         public void AddTable(Table table)
         {
-            Tables.Add (table);
+            Tables.Add(table);
         }
 
         //Search a table by name
@@ -44,7 +46,7 @@ namespace DataBase
                 if (table.GetName() == name)
                 {
                     tab = table;
-                    break; 
+                    break;
                 }
             }
             return tab;
@@ -53,11 +55,17 @@ namespace DataBase
         public void Load(string filename)
         {
             string text = File.ReadAllText(filename);
-            string[] values = text.Split(new char[] {'~'});
+            string[] values = text.Split(new char[] { '~' });
         }
 
         public void Save(string filename)
         {
+            foreach(Table tab in Tables)
+            {
+                string folderName = System.IO.Path.Combine(pathString, tab.GetName());
+                CreateFolder(folderName);
+                tab.Save(folderName);
+            }
             
 
         }
@@ -69,8 +77,14 @@ namespace DataBase
         {
             return Tables.Count;
         }
-        
-    }
 
-   
+        public void CreateFolder(string folderName)
+        {
+            if (!System.IO.File.Exists(folderName))
+                {
+                    System.IO.File.Create(folderName);
+                }            
+        }
+    }
 }
+  
