@@ -98,12 +98,5 @@ namespace UnitTests
             Assert.AreEqual("badger", c6.GetValue(1));
 
         }
-
-        [TestMethod]
-        public void TestLoad()
-        {
-            
-
-        }
     }
 }
