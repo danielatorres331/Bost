@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,6 @@ namespace BostDB
         {
             Columns.Remove(SearchColumnByName(name));
         }
-
 
         //Returns the column whose index is passed by parameter
         public Column GetColumn(int index) 
@@ -76,9 +76,48 @@ namespace BostDB
             }
             return column1;
         }
-        public int getNumColumns() {
+        public int GetNumColumns() {
 
             return Columns.Count;
+           
+        }
+        public List<Column> GetColumns()        
+        {
+            return this.Columns;
+        }
+        public void Save(string folder)
+        {
+            foreach(Column column in Columns)
+            {
+                string txtName = column.GetName() + ".txt";
+                string pathString = System.IO.Path.Combine(folder, txtName);
+                //(path, content)
+                File.WriteAllText(pathString, column.Save());
+            }
+        }
+        /**/
+        public Table Select(List<Column> columns) 
+        {
+            Table newTable = new Table("newTable");
+
+            foreach (Column column in columns) 
+            {
+                newTable.AddColumn(column);            
+            }
+            return newTable;
+        
+        }
+        public Table SelectAll()
+        {
+            Table newTable = new Table("newTable");
+            List<Column> columnsTable = new List<Column>();
+            columnsTable = this.GetColumns();
+
+            foreach (Column column in columnsTable)
+            {
+                newTable.AddColumn(column);
+            }            
+            return newTable;
         }
     }
 }
