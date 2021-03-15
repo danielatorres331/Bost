@@ -52,6 +52,16 @@ namespace DataBase
             }
             return tab;
         }
+        public Table SelectAll(string name) 
+        {
+            return null;
+        }
+        public Table SelectColumns(string table, List<string> columNames)
+        {
+            return null;
+
+        }
+
         // Load database : path, file
         public void Load(string nameDB)
         {
