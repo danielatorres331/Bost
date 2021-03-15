@@ -143,10 +143,15 @@ namespace UnitTests
             table10.AddColumn(c1);
             table10.AddColumn(c2);
 
+            List<Column> columns = new List<Column>();
+            columns = table10.GetColumns();
 
+            List<Column> columns2 = new List<Column>();
+            columns2.Add(c1);
+            Assert.AreEqual(table10.GetNumColumns(),table10.Select(columns).GetNumColumns());
+            Assert.AreEqual(table10.GetColumn(0), table10.Select(columns2).GetColumn(0));
 
-
-    }
+        }
 
         [TestMethod]
         public void TestSelectAll()
