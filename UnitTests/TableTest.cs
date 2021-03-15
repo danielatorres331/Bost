@@ -140,16 +140,22 @@ namespace UnitTests
             Table table10 = new Table("TableName");
             Column c1 = new Column("c1");
             Column c2 = new Column("c2");
+            Column c3 = new Column("c3");
+
             table10.AddColumn(c1);
             table10.AddColumn(c2);
+            table10.AddColumn(c3);
 
             List<Column> columns = new List<Column>();
             columns = table10.GetColumns();
 
             List<Column> columns2 = new List<Column>();
             columns2.Add(c1);
+            columns2.Add(c3);
+
             Assert.AreEqual(table10.GetNumColumns(),table10.Select(columns).GetNumColumns());
             Assert.AreEqual(table10.GetColumn(0), table10.Select(columns2).GetColumn(0));
+            Assert.IsTrue(table10.Select(columns2).GetColumns().Contains(c3));
 
         }
 
@@ -159,8 +165,16 @@ namespace UnitTests
             Table table11 = new Table("TableName");
             Column c11 = new Column("c11");
             Column c22 = new Column("c22");
+            Column c33 = new Column("c33");
+            Column c44 = new Column("c44");
             table11.AddColumn(c11);
             table11.AddColumn(c22);
+            table11.AddColumn(c33);
+            table11.AddColumn(c44);
+
+            Assert.AreEqual(table11.GetNumColumns(), table11.SelectAll().GetNumColumns());
+            Assert.IsTrue(table11.SelectAll().GetColumns().Contains(c11));
+            
 
             
         }
