@@ -67,7 +67,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void TestSave()
+        public void TestSaveLoad()
         {
             DataBase db5 = new DataBase("DataBase5", "Bost", "password");
             Table t5 = new Table("Table5");
@@ -84,10 +84,10 @@ namespace UnitTests
             db5.AddTable(t5);
             db5.AddTable(t6);
 
-            db5.Save("dbTest.txt");
+            db5.Save();
 
             DataBase db6 = new DataBase("DataBase6", "Bost", "password");
-            db6.Load("dbTest.txt");
+            db6.Load("DataBase5");
 
             Assert.AreEqual("DataBase5", db6.GetName());
             Assert.AreEqual(2, db6.GetNumTables());

@@ -63,5 +63,15 @@ namespace BostDB
             }
             return i;
         }
+
+        public string Save() {
+            string text = null;
+            foreach (string value in ValuesList)
+            {
+                text = value + "~";
+            }
+
+            return text;
+        }
     }
 }
