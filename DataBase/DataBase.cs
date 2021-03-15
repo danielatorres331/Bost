@@ -10,7 +10,7 @@ namespace BostDB
     public class DataBase
     {
         //List for storing the tables
-        List<Table> Tables = null;
+        List<Table> Tables = new List<Table>();
         String Name;
         String UserName;
         String Password;
@@ -55,7 +55,7 @@ namespace BostDB
         // Load database : path, file
         public void Load(string nameDB)
         {
-            string dbName = System.IO.Path.Combine(@"/Folder", nameDB);
+            string dbName = System.IO.Path.Combine(@"Folder", nameDB);
             if (!System.IO.File.Exists(dbName))
             {
                 string[] dirs = Directory.GetDirectories(dbName);
