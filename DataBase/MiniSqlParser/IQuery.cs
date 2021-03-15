@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 
-namespace DataBase.MiniSqlParser
+namespace BostDB.MiniSqlParser
 {
    public interface IQuery
     {

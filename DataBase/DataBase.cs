@@ -100,7 +100,7 @@ namespace BostDB
         {
             return Name;
         }
-        public int GetNumTable()
+        public int GetNumTables()
         {
             return Tables.Count;
         }

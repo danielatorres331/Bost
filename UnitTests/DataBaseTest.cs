@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using BostDB;
+using System.Collections.Generic;
 
 namespace UnitTests
 {
@@ -19,7 +20,7 @@ namespace UnitTests
         {
             DataBase db2 = new DataBase("DataBase2", "Bost", "password");
             Table table1 = new Table("Table1");
-            db2.RemoveTable(table1);
+            db2.DropTable(table1);
             Assert.IsNull(db2.SearchTableByName("Table1"));
 
         }
