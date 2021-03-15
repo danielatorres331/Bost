@@ -87,6 +87,30 @@ namespace UnitTests
             Assert.AreEqual(column4, table7.SearchColumnByName("Column4"));
 
         }
-        
+        [TestMethod]
+        public void TestGetNumColumns()
+        {
+            Table table8 = new Table("Table8");
+            Column column1 = new Column("Column1");
+            Column column2 = new Column("Column2");
+            table8.AddColumn(column1);
+            table8.AddColumn(column2);
+            Assert.AreEqual(2, table8.getNumColumns());
+
+
+            Table table9 = new Table("Table9");
+            Column column3 = new Column("Column3");
+            Column column4 = new Column("Column4");
+            Column column5 = new Column("Column5");
+            table9.AddColumn(column3);
+            table9.AddColumn(column4);
+            table9.AddColumn(column5);
+            Assert.AreEqual(3, table9.getNumColumns());
+
+            Table table10 = new Table("Table10");
+            Assert.AreEqual(0, table10.getNumColumns());
+        }
+
+
     }
 }
