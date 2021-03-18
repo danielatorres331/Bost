@@ -13,6 +13,8 @@ namespace DataBase.MiniSqlParser
         {
            const string selectAllPattern = @"SELECT \* FROM([a-zA-Z0-9]+)";
            const string selectColumnsPattern = @"SELECT ([a-zA-Z0-9,]+)FROM([a-zA-Z0-9]+)";
+           const string insertPattern = @"INSERT INTO ([a-zA-Z0-9]+) VALUES \(([^\)]+)\);";
+
 
             Match match = Regex.Match(miniSqlSentence, selectAllPattern);
             if(match.Success)
@@ -21,7 +23,18 @@ namespace DataBase.MiniSqlParser
                 SelectAll selectAll = new SelectAll(match.Groups[1].Value);
                 return selectAll;
             }
+
             match = Regex.Match(miniSqlSentence,selectColumnsPattern);
+            if (match.Success)
+            {
+                string[] columnNames = match.Groups[1].Value.Split('~');
+
+                //Gets a collection of groups matched by the regular expression
+                SelectColumns selectColumns = new SelectColumns(match.Groups[2].Value, columnNames);
+                return selectColumns;
+            }
+
+            match = Regex.Match(miniSqlSentence, selectColumnsPattern);
             if (match.Success)
             {
                 string[] columnNames = match.Groups[1].Value.Split('~');
