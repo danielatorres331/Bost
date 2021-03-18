@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataBase
+namespace BostDB
 {
     public class Column
     {
@@ -25,13 +25,6 @@ namespace DataBase
         {
             return ValuesList[index];
         }
-
-        /*
-        public List<String> GetValues(String value)
-        {
-            return null;
-        }
-        */
 
         //Returns the name of the column
         public String GetName()
