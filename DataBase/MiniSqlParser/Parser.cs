@@ -13,7 +13,7 @@ namespace DataBase.MiniSqlParser
         {
            const string selectAllPattern = @"SELECT \* FROM([a-zA-Z0-9]+)";
            const string selectColumnsPattern = @"SELECT ([a-zA-Z0-9,]+)FROM([a-zA-Z0-9]+)";
-
+            const string delete = @"DELETE FROM ([a-zA-Z0-9.]+) WHERE ([a-zA-Z0-9.]+) .{1,3} ([a-zA-Z0-9.]+);";
             Match match = Regex.Match(miniSqlSentence, selectAllPattern);
             if(match.Success)
             {
