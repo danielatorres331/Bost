@@ -4,25 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BostDB.MiniSqlParser
+namespace DataBase.MiniSqlParser
 {
-    public class SelectAll : IQuery
+    class Delete : IQuery
     {
         private string m_table;
+        private string m_column;
+
         public string Table()
         {
             return m_table;
         }
-
-        public  SelectAll(string table)
+        public string Column() 
+        {
+            return m_column;
+        }
+        public Delete(string table, string column)
         {
             m_table = table;
-            
+            m_column = column;
+
         }
         public string Run(DataBase database)
         {
-          //  return database.SelectAll(m_table).ToString;
-          return null;
+            return null;
         }
     }
 }
