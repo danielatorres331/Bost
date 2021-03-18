@@ -23,7 +23,9 @@ namespace BostDB
             Name = name;
             UserName = userName;
             Password = password;
-            pathString = System.IO.Path.Combine(@"/Folder", name);
+            CreateFolder(@"Folder");
+            pathString = System.IO.Path.Combine(@"Folder", name);
+            CreateFolder(pathString);
         }
 
         //Delete a table
@@ -52,9 +54,17 @@ namespace BostDB
             }
             return tab;
         }
+
+        //Change the name of the database
+        public void setName(string name)
+        {
+            Name = name;
+        }
+
         // Load database : path, file
         public void Load(string nameDB)
         {
+            setName(nameDB);
             string dbName = System.IO.Path.Combine(@"Folder", nameDB);
             if (!System.IO.File.Exists(dbName))
             {
@@ -107,9 +117,10 @@ namespace BostDB
 
         public void CreateFolder(string folderName)
         {
-            if (!System.IO.File.Exists(folderName))
+            if (!System.IO.Directory.Exists(folderName))
                 {
-                    System.IO.File.Create(folderName);
+                //folderName = "\\" + folderName;    
+                System.IO.Directory.CreateDirectory(folderName);
                 }
         }
         // Read and display the data from your file.
