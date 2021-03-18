@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace DataBase.MiniSqlParser
+namespace BostDB.MiniSqlParser
 {
    public static class Parser
     {

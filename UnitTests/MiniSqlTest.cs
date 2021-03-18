@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using DataBase;
-using DataBase.MiniSqlParser;
+using BostDB;
+using BostDB.MiniSqlParser;
 namespace UnitTests
 {
     [TestClass]
