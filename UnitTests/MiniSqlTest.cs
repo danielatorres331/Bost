@@ -14,5 +14,24 @@ namespace UnitTests
             Assert.IsTrue(query is SelectAll);
             Assert.AreEqual("Table1", (query as SelectAll).Table());
         }
+
+        public void TestInsert()
+        {
+            IQuery query = Parser.Parse("INSERT INTO ");
+            Assert.IsTrue(query is SelectAll);
+            Assert.AreEqual("Table1", (query as SelectAll).Table());
+        }
+
+        public void TestDelete()
+        { 
+            
+        }
+
+        public void TestUpdate()
+        { 
+        
+        
+        }
+
     }
 }
