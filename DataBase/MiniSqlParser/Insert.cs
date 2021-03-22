@@ -1,8 +1,10 @@
-﻿using System;
+﻿using BostDB.MiniSqlParser;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BostDB;
 
 namespace BostDB.MiniSqlParser
 {
@@ -20,14 +22,15 @@ namespace BostDB.MiniSqlParser
         {
             return m_values;
         }
-            public Insert( string table, string[] values)
+        public Insert(string table, string[] values)
         {
             m_table = table;
             m_values = values;
         }
-        public string Run(DataBase database)
+
+        public string Run(BostDB.DataBase database)
         {
-            return null;
+            throw null;
         }
     }
 }
