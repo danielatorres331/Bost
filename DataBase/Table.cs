@@ -22,6 +22,11 @@ namespace BostDB
             Columns = new List<Column>();
         }
 
+        internal object SelectAll(string m_table)
+        {
+            throw new NotImplementedException();
+        }
+
         //Adds a column to the table
         public void AddColumn(Column column)
         {
@@ -39,12 +44,10 @@ namespace BostDB
         {
             return Columns[index];
         }
-
         public String GetName()
         {
             return Name;
         }
-
         //Adds the values of the list passed by parameter to the columns of the table
         public void AddRow(List<String> values)
         {
@@ -76,6 +79,8 @@ namespace BostDB
             }
             return column1;
         }
+
+        
 
         public void Save(string folder)
         {
