@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataBase.MiniSqlParser
+namespace BostDB.MiniSqlParser
 {
     public class Insert : IQuery
     {
