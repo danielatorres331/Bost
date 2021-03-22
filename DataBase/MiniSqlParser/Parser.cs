@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataBase.MiniSqlParser;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace BostDB.MiniSqlParser
         {
            const string selectAllPattern = @"SELECT \* FROM([a-zA-Z0-9]+)";
            const string selectColumnsPattern = @"SELECT ([a-zA-Z0-9,]+)FROM([a-zA-Z0-9]+)";
-            const string delete = @"DELETE FROM ([a-zA-Z0-9.]+) WHERE ([a-zA-Z0-9.]+) .{1,3} ([a-zA-Z0-9.]+);";
+            const string deletePattern = @"DELETE FROM ([a-zA-Z0-9.]+) WHERE ([a-zA-Z0-9.]+) .{1,2} ([a-zA-Z0-9.]+);";
            const string insertPattern = @"INSERT INTO ([a-zA-Z0-9]+) VALUES \(([^\)]+)\);";
 
 
@@ -33,6 +34,12 @@ namespace BostDB.MiniSqlParser
                 //Gets a collection of groups matched by the regular expression
                 SelectColumns selectColumns = new SelectColumns(match.Groups[2].Value, columnNames);
                 return selectColumns;
+            }
+            match= Regex.Match(miniSqlSentence, deletePattern);
+            if (match.Success)
+            {
+                Delete deleteValue = new Delete(match.Groups[1].Value, match.Groups[2].Value,match.Groups[3].Value, match.Groups[4].Value);
+                return deleteValue;
             }
 
             return null;
