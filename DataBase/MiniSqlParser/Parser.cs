@@ -13,6 +13,9 @@ namespace BostDB.MiniSqlParser
         {
            const string selectAllPattern = @"SELECT \* FROM([a-zA-Z0-9]+)";
            const string selectColumnsPattern = @"SELECT ([a-zA-Z0-9,]+)FROM([a-zA-Z0-9]+)";
+            const string delete = @"DELETE FROM ([a-zA-Z0-9.]+) WHERE ([a-zA-Z0-9.]+) .{1,3} ([a-zA-Z0-9.]+);";
+           const string insertPattern = @"INSERT INTO ([a-zA-Z0-9]+) VALUES \(([^\)]+)\);";
+
 
             Match match = Regex.Match(miniSqlSentence, selectAllPattern);
             if(match.Success)
@@ -21,6 +24,7 @@ namespace BostDB.MiniSqlParser
                 SelectAll selectAll = new SelectAll(match.Groups[1].Value);
                 return selectAll;
             }
+
             match = Regex.Match(miniSqlSentence,selectColumnsPattern);
             if (match.Success)
             {
