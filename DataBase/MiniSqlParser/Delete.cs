@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataBase.MiniSqlParser
+namespace BostDB.MiniSqlParser
 {
     class Delete : IQuery
     {
