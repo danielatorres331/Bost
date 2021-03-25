@@ -79,9 +79,15 @@ namespace BostDB
             }
             return column1;
         }
+        public int GetNumColumns() {
 
-        
-
+            return Columns.Count;
+           
+        }
+        public List<Column> GetColumns()        
+        {
+            return this.Columns;
+        }
         public void Save(string folder)
         {
             foreach(Column column in Columns)
@@ -91,6 +97,30 @@ namespace BostDB
                 //(path, content)
                 File.WriteAllText(pathString, column.Save());
             }
+        }
+        /**/
+        public Table Select(List<Column> columns) 
+        {
+            Table newTable = new Table("newTable");
+
+            foreach (Column column in columns) 
+            {
+                newTable.AddColumn(column);            
+            }
+            return newTable;
+        
+        }
+        public Table SelectAll()
+        {
+            Table newTable = new Table("newTable");
+            List<Column> columnsTable = new List<Column>();
+            columnsTable = this.GetColumns();
+
+            foreach (Column column in columnsTable)
+            {
+                newTable.AddColumn(column);
+            }            
+            return newTable;
         }
     }
 }
