@@ -11,6 +11,9 @@ namespace BostDB.MiniSqlParser
     {
         private string m_table;
         private string[] m_values;
+        private string m_column;
+        private string m_value;
+        private List<string> val;
 
         public string Table()
         {
@@ -21,15 +24,26 @@ namespace BostDB.MiniSqlParser
         {
             return m_values;
         }
-            public Insert( string table, string[] values)
+        public Insert(string table, string[] values)
         {
             m_table = table;
             m_values = values;
         }
-        public string Run(DataBase database)
+        public string Run(DataBase dataBase)
         {
-            //return database.Insert(m_table, m_values).ToString();
-            return null;
+            Table table = dataBase.SearchTableByName(m_table);
+            Column column = table.SearchColumnByName(m_column);
+
+
+            foreach (string values in m_values)
+            {
+                val.Add(values);
+            }
+
+            table.AddRow(val);
+
+            string m = "Se ha insertado correctamente";
+            return m;
         }
     }
 }
