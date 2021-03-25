@@ -10,12 +10,13 @@ namespace BostDB
     public class DataBase
     {
         //List for storing the tables
-        List<Table> Tables = null;
+        List<Table> Tables = new List<Table>(); // create the list empty
         String Name;
         String UserName;
         String Password;
         string pathString;
        
+
 
         //Constructor
         public DataBase(String name, String userName, String password)
@@ -35,7 +36,8 @@ namespace BostDB
         //Adds a table to the DataBase
         public void AddTable(Table table)
         {
-            Tables.Add(table);
+            
+           Tables.Add(table);
         }
 
         //Search a table by name
@@ -52,15 +54,20 @@ namespace BostDB
             }
             return tab;
         }
-        public Table SelectAll(string name) 
-        {
-            return null;
-        }
-        public Table SelectColumns(string table, List<string> columNames)
-        {
-            return null;
-
-        }
+        //public Table SelectAll(string name) 
+       //{
+       // return null;
+        //}
+       // public Table SelectColumns(string table, List<int> columNames)
+       // {
+           // foreach (Table tab in Tables)
+            //{
+                //if (tab.GetName() == table && tab.GetColumn().Equals(columNames))
+                //{
+              //  }
+            //}
+          //  return null;
+        //}
 
         // Load database : path, file
         public void Load(string nameDB)
@@ -102,9 +109,7 @@ namespace BostDB
                 string folderName = System.IO.Path.Combine(pathString, tab.GetName());
                 CreateFolder(folderName);
                 tab.Save(folderName);
-            }
-            
-
+            }         
         }
         public string GetName()
         {

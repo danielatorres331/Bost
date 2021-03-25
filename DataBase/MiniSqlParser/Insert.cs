@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BostDB;
 
-namespace DataBase.MiniSqlParser
+namespace BostDB.MiniSqlParser
 {
     public class Insert : IQuery
     {
@@ -27,6 +28,7 @@ namespace DataBase.MiniSqlParser
         }
         public string Run(DataBase database)
         {
+            
             return null;
         }
     }
