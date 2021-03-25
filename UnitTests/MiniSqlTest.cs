@@ -10,15 +10,15 @@ namespace UnitTests
         [TestMethod]
         public void Parsing()
         {
-            IQuery query = Parser.Parse("SELECT * FROM Table1;");
+            SelectAll query = (SelectAll) Parser.Parse("SELECT * FROM Table1;");
             
-            Assert.AreEqual("Table1", (query as SelectAll).Table());
+            Assert.AreEqual("Table1", query.Table());
         }
 
         [TestMethod]
         public void TestInsert()
         {
-            IQuery query = Parser.Parse("INSERT INTO Table1 VALUES (34567);");
+            IQuery query = Parser.Parse("INSERT INTO Table1 VALUES ((34567));");
             
             Assert.AreEqual("Table1","(34567)", (query as Insert).Table());
         }
@@ -38,6 +38,12 @@ namespace UnitTests
         
         
         }*/
+        {
+            IQuery query = Parser.Parse("UPDATE  ");
+            Assert.IsTrue(query is SelectAll);
+            Assert.AreEqual("Table1", (query as SelectAll).Table());
+
+        }
 
     }
 }

@@ -50,7 +50,7 @@ namespace BostDB
             ValuesList.Add(newValue);
         }
 
-        //Returns the index os the column whose value is the one passed by parameter
+        //Returns the index of the column whose value is the one passed by parameter
         public int GetIndex(String value)
         {
             int i;
@@ -71,6 +71,19 @@ namespace BostDB
                 }      
             }
             return i;
+        }
+
+        public List<int> GetIndexes(String value)
+        {
+            List<int> indexes = new List<int>();
+            for (int i = 0; i < ValuesList.Count; i++)
+            {
+                if (ValuesList[i] == value)
+                {
+                    indexes.Add(i);
+                }
+            }
+            return indexes;
         }
 
         public string Save() {

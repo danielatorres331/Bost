@@ -49,6 +49,7 @@
     <Compile Include="Messages.cs" />
     <Compile Include="Column.cs" />
     <Compile Include="DataBase.cs" />
+    <Compile Include="MiniSqlParser\Update.cs" />
     <Compile Include="MiniSqlParser\Delete.cs" />
     <Compile Include="MiniSqlParser\Insert.cs" />
     <Compile Include="MiniSqlParser\IQuery.cs" />
