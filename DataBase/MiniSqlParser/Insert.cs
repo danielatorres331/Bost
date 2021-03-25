@@ -10,40 +10,37 @@ namespace BostDB.MiniSqlParser
     public class Insert : IQuery
     {
         private string m_table;
-        private string[] m_values;
-        private string m_column;
-        private string m_value;
-        private List<string> val;
+        private List<String> m_values;
 
         public string Table()
         {
             return m_table;
         }
 
-        public string[] values()
+        public List<String> values()
         {
             return m_values;
         }
-        public Insert(string table, string[] values)
+            public Insert( string table, List<String> values)
         {
             m_table = table;
             m_values = values;
         }
-        public string Run(DataBase dataBase)
+        public string Run(DataBase database)
         {
-            Table table = dataBase.SearchTableByName(m_table);
-            Column column = table.SearchColumnByName(m_column);
+            Table t = database.SearchTableByName(m_table);
 
-
-            foreach (string values in m_values)
+            if (t == null)
             {
-                val.Add(values);
+                return Messages.TableDoesNotExist;
             }
-
-            table.AddRow(val);
-
-            string m = "Se ha insertado correctamente";
-            return m;
+            else
+            {
+                t.AddRow(m_values);
+                return Messages.InsertSuccess;
+            }
+                  
+            
         }
     }
 }

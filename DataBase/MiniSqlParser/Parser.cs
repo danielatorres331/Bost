@@ -46,9 +46,42 @@ namespace BostDB.MiniSqlParser
             if (match.Success)
             {
                 string[] values = match.Groups[2].Value.Split(',');
+                List<String> listValues = new List<string>();
 
-                Insert insert = new Insert(match.Groups[1].Value, values);
+                foreach (string v in values)
+                {
+                    listValues.Add(v);
+                }
+
+                Insert insert = new Insert(match.Groups[1].Value, listValues);
                 return insert;
+            }
+
+            match = Regex.Match(miniSqlSentence, updatePattern);
+            if(match.Success)
+            {
+                List<string> columns = new List<string>(), //Save columns
+                    newValues = new List<string>(), //Save the new value
+                    columnsName = new List<string>(), //Save the name of the column 
+                    valuesToUpdate = new List<string>(); //Save values where we want to update
+
+                string[] set = match.Groups[2].Value.Split(',','=');
+                for (int i = 0; i < set.Length; i++)
+                {
+                    columns.Add(set[i]);
+                    i++;
+                    newValues.Add(set[i]);
+                }
+                string[] where = match.Groups[3].Value.Split(',');
+                for (int i = 0; i < set.Length; i++)
+                {
+                    columnsName.Add(where[i]);
+                    i++;
+                    valuesToUpdate.Add(where[i]);
+                }
+
+                Update update = new Update(match.Groups[1].Value, columns, newValues, columnsName, valuesToUpdate);
+                return update;
             }
 
             return null;
