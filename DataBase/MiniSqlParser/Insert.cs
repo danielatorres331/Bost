@@ -28,7 +28,7 @@ namespace BostDB.MiniSqlParser
         }
         public string Run(DataBase database)
         {
-            //return database.Insert(m_table, m_values).ToString();
+            
             return null;
         }
     }

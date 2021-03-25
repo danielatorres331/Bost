@@ -109,9 +109,7 @@ namespace BostDB
                 string folderName = System.IO.Path.Combine(pathString, tab.GetName());
                 CreateFolder(folderName);
                 tab.Save(folderName);
-            }
-            
-
+            }         
         }
         public string GetName()
         {
