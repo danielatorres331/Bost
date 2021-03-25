@@ -28,9 +28,11 @@ namespace UnitTests
         }
 
         public void TestUpdate()
-        { 
-        
-        
+        {
+            IQuery query = Parser.Parse("UPDATE  ");
+            Assert.IsTrue(query is SelectAll);
+            Assert.AreEqual("Table1", (query as SelectAll).Table());
+
         }
 
     }
