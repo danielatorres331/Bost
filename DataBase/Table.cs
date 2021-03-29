@@ -117,5 +117,71 @@ namespace BostDB
             }            
             return newTable;
         }
+        public List<int> SelectCondition(string m_column, string m_operator,string m_value) 
+        {
+            List<int> index = new List<int>();
+            Column column = null;
+            foreach (Column col in Columns)
+            {
+                if (m_column == col.GetName())
+                {
+                    column = col;
+                }
+                
+            }           
+                List<string> values = column.GetValues();
+                if (m_operator == "<")
+                {
+                foreach (string v in values)
+                {
+                    if (v.CompareTo(m_value)<0) 
+                    {
+                        index.Add(column.GetIndex(m_value));
+                    }                    
+                }
+                }
+                else if (m_operator == ">")
+                {
+                foreach (string v in values)
+                {
+                    if (v.CompareTo(m_value) > 0 )
+                    {
+                        index.Add(column.GetIndex(m_value));
+                    }
+                }
+
+            }
+                else if (m_operator == "<=")
+                {
+                foreach (string v in values)
+                {
+                    if (v.CompareTo(m_value) < 0 || v.CompareTo(m_value) == 0)
+                    {
+                        index.Add(column.GetIndex(m_value));
+                    }
+                }
+            }
+                else if (m_operator == ">=")
+                {
+                foreach (string v in values)
+                {
+                    if (v.CompareTo(m_value) > 0 || v.CompareTo(m_value) == 0)
+                    {
+                        index.Add(column.GetIndex(m_value));
+                    }
+                }
+            }
+                else
+                {
+                foreach (string v in values)
+                {
+                    if (v.CompareTo(m_value) == 0)
+                    {
+                        index.Add(column.GetIndex(m_value));
+                    }
+                }
+            }            
+            return index;
+        }
     }
 }
