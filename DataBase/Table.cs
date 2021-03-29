@@ -22,7 +22,7 @@ namespace BostDB
             Columns = new List<Column>();
         }
 
-        internal object SelectAll()
+        internal object SelectAll(string ds)
         {
             throw new NotImplementedException();
         }

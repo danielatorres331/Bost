@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BostDB.MiniSqlParser
 {
-    class Delete : IQuery
+    public class Delete : IQuery
     {
         private string m_table;
         private string m_column;
@@ -33,7 +33,11 @@ namespace BostDB.MiniSqlParser
         }
         public string Run(BostDB.DataBase database)
         {
-            return null;
+            BostDB.Table tab = database.SearchTableByName(m_table);
+
+            string mensaje = "Se ha eliminado correctamente";
+            return mensaje;
+
         }
     }
 }

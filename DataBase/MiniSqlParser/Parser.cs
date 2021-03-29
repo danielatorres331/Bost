@@ -16,7 +16,7 @@ namespace BostDB.MiniSqlParser
             const string selectColumnsPattern = @"SELECT ([a-zA-Z0-9,]+) FROM ([a-zA-Z0-9]+)";
             const string deletePattern = @"DELETE FROM ([a-zA-Z0-9.]+) WHERE ([a-zA-Z0-9.]+)([<>=]{1,2})([a-zA-Z0-9.]+);";
             const string insertPattern = @"INSERT INTO ([a-zA-Z0-9]+) VALUES \(([^\)]+)\);";
-
+            const string updatePattern ="";
 
             Match match = Regex.Match(miniSqlSentence, selectAllPattern);
             if (match.Success)
