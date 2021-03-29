@@ -18,20 +18,18 @@ namespace UnitTests
         public void TestInsert()
         {
             IQuery query = Parser.Parse("INSERT INTO Table1 VALUES (34567);"); 
-            Assert.AreEqual("Table1", (query as SelectColumns).Table());
-            Assert.AreEqual("(34567)", (query as Insert).ToString());
+            Assert.AreEqual("Table1", (query as Insert).Table());
+            Assert.AreEqual("34567", (query as Insert).ToString());
         }
 
-
-       
-       /*[TestMethod]
+        [TestMethod]
        public void TestDelete()
         {
-           IQuery query = Parser.Parse("DELETE FROM Table1 WHERE VALUES = (34567) ");
-           Assert.AreEqual("Table1", (query as SelectAll).Table());
-           Assert.AreEqual("(34567)", (query as Delete).ToString());
+           IQuery query = Parser.Parse("DELETE FROM Table1 WHERE VALUES (34567);");
+            Assert.AreEqual("Table1", (query as Delete).Table());
+            Assert.AreEqual("34567", (query as Delete).ToString());
 
-        }*/
+        }
 
         [TestMethod]
         public void TestUpdate()
