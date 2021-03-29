@@ -95,7 +95,7 @@ namespace UnitTests
             Column column2 = new Column("Column2");
             table8.AddColumn(column1);
             table8.AddColumn(column2);
-            Assert.AreEqual(2, table8.getNumColumns());
+            Assert.AreEqual(2, table8.GetNumColumns());
 
 
             Table table9 = new Table("Table9");
@@ -105,10 +105,10 @@ namespace UnitTests
             table9.AddColumn(column3);
             table9.AddColumn(column4);
             table9.AddColumn(column5);
-            Assert.AreEqual(3, table9.getNumColumns());
+            Assert.AreEqual(3, table9.GetNumColumns());
 
             Table table10 = new Table("Table10");
-            Assert.AreEqual(0, table10.getNumColumns());
+            Assert.AreEqual(0, table10.GetNumColumns());
         }
 
 

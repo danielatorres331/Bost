@@ -2,6 +2,8 @@
 using System;
 using BostDB;
 using BostDB.MiniSqlParser;
+using System.Collections.Generic;
+
 namespace UnitTests
 {
     [TestClass]
@@ -11,7 +13,6 @@ namespace UnitTests
         public void Parsing()
         {
             SelectAll query = (SelectAll) Parser.Parse("SELECT * FROM Table1;");
-            
             Assert.AreEqual("Table1", query.Table());
         }
 
@@ -19,7 +20,7 @@ namespace UnitTests
         public void TestInsert()
         {
             IQuery query = Parser.Parse("INSERT INTO Table1 VALUES ((34567));");
-            
+
             Assert.AreEqual("Table1","(34567)", (query as Insert).Table());
         }
 
@@ -30,19 +31,20 @@ namespace UnitTests
            Assert.IsTrue(query is Delete);
            Assert.AreEqual("Table1", "34567", (query as Delete).Table());
            
-        }
+        }*/
 
         [TestMethod]
-        public void TestUpdate()
-        { 
-        
-        
-        }*/
-        {
-            IQuery query = Parser.Parse("UPDATE  ");
-            Assert.IsTrue(query is SelectAll);
-            Assert.AreEqual("Table1", (query as SelectAll).Table());
-
+        public void TestUpdate(){
+            IQuery query = (Update)Parser.Parse("UPDATE Table1 SET column1=Alfred#Schmidt,column2=Frankfurt WHERE column2=5;");
+            Assert.IsTrue(query is Update);
+            Assert.AreEqual("Table1", (query as Update).GetTable());
+            List<string> columns = new List<string>();
+            columns.Add("column1");
+            columns.Add("column2");
+            List<string> columnsParse = (query as Update).GetColumns();
+            Assert.AreEqual(columns.Count, columnsParse.Count);
+            for(int i = 0; i < columns.Count; i++)
+                Assert.AreEqual(columns[i], columnsParse[i]);
         }
 
     }

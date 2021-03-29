@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BostDB.MiniSqlParser
 {
-    class Update : IQuery
+    public class Update : IQuery
     {
         private string m_table;
         private List<string> m_columns;
@@ -27,17 +27,19 @@ namespace BostDB.MiniSqlParser
         {
             BostDB.Table table = database.SearchTableByName(m_table);
             List<int> indexes = new List<int>();
-            //find the indexes where we want to update
+            
+            //Find the indexes where we want to update
             for (int i = 0; i < m_columnsNamesToUpdate.Count; i++)
             {
                 BostDB.Column column = table.SearchColumnByName(m_columnsNamesToUpdate[i]);
                 indexes = column.GetIndexes(m_valuesToUpdate[i]);
             }
 
-            //
+            //find columns where we want to update
             for(int i = 0; i < m_columns.Count; i++)
             {
                 BostDB.Column column = table.SearchColumnByName(m_columns[i]);
+                //Set the new values in the indexes
                 for(int j = 0; j < indexes.Count; j++)
                 {
                     column.SetValue(indexes[j], m_newValues[i]);
