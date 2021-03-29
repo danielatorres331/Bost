@@ -82,5 +82,9 @@ namespace BostDB
 
             return text;
         }
+        public List<String> GetValues() 
+        {
+            return ValuesList;
+        }
     }
 }

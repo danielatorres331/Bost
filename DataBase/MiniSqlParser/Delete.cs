@@ -11,7 +11,7 @@ namespace BostDB.MiniSqlParser
     {
         private string m_table;
         private string m_column;
-        private string m_operador;
+        private string m_operator;
         private string m_value;
 
         public string Table()
@@ -22,18 +22,51 @@ namespace BostDB.MiniSqlParser
         {
             return m_column;
         }
+        public string Operator()
+        {
+            return m_operator;
+        }
+        public string Value()
+        {
+            return m_value;
+        }
         public Delete(string table, string column, string operador, string value)
         {
             m_table = table;
             m_column = column;
-            m_operador = operador ;
+            m_operator = operador;
             m_value = value;
 
 
         }
-        public string Run(BostDB.DataBase database)
+        //NO ESTA SUBIDOOOOOOOOOOOOOO !!!!!!!!!!! SOLO ESTA EN MI ORDENADOR 
+        public string Run(DataBase database)
         {
-            return null;
+            Table t = database.SearchTableByName(m_table);
+
+            if (t == null)
+            {
+                return "error";
+            }
+            else
+            {
+                List<int> index = t.SelectCondition(m_column,m_operator,m_value);
+                Column c = t.SearchColumnByName(m_column);
+                if (c == null) 
+                {
+                    return "error";
+                }
+                else
+                {
+                foreach (int i in index)
+                {
+                    c.DeleteValue(i);
+                }
+                return  "mensage";
+                }
+               
+            }
+            
         }
     }
 }
