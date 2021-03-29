@@ -17,15 +17,17 @@ namespace BostDB.MiniSqlParser
             return m_table;
         }
 
-        public List<String> values()
+        public List<String> Values()
         {
             return m_values;
         }
+
             public Insert( string table, List<String> values)
         {
             m_table = table;
             m_values = values;
         }
+
         public string Run(DataBase database)
         {
             Table t = database.SearchTableByName(m_table);

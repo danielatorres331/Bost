@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BostDB.MiniSqlParser
 {
-    class Delete : IQuery
+    public class Delete : IQuery
     {
         private string m_table;
         private string m_column;
