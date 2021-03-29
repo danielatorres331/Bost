@@ -22,10 +22,7 @@ namespace BostDB
             Columns = new List<Column>();
         }
 
-        internal object SelectAll()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         //Adds a column to the table
         public void AddColumn(Column column)
