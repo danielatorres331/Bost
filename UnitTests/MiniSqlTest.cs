@@ -11,24 +11,21 @@ namespace UnitTests
         public void Parsing()
         {
             IQuery query = Parser.Parse("SELECT * FROM Table1;");
-            
             Assert.AreEqual("Table1", (query as SelectAll).Table());
         }
 
         [TestMethod]
         public void TestInsert()
         {
-            IQuery query = Parser.Parse("INSERT INTO Table1 VALUES (34567);");
-            
+            IQuery query = Parser.Parse("INSERT INTO Table1 VALUES ((34567));"); 
             Assert.AreEqual("Table1","(34567)", (query as Insert).Table());
         }
 
-       /* [TestMethod]
+        [TestMethod]
        public void TestDelete()
         {
            IQuery query = Parser.Parse("DELETE FROM Table1 WHERE VALUES = '34567' ");
-           Assert.IsTrue(query is Delete);
-           Assert.AreEqual("Table1", "34567", (query as Delete).Table());
+           Assert.IsNull("Table1", "34567", (query as Delete).Table());
            
         }
 
@@ -37,7 +34,7 @@ namespace UnitTests
         { 
         
         
-        }*/
+        }
 
     }
 }
