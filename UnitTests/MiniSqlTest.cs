@@ -26,8 +26,6 @@ namespace UnitTests
             Assert.AreEqual("hi", (query1 as Insert).Values()[0]);
             Assert.AreEqual("12", (query1 as Insert).Values()[1]);
             Assert.AreEqual("bye", (query1 as Insert).Values()[2]);
-
-
         }
 
         [TestMethod]
