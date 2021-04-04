@@ -64,6 +64,11 @@ namespace BostDB.MiniSqlParser
                 {
                     columns.Add(set[i]);
                     i++;
+                    
+                    if (set[i].Contains("#"))
+                    {
+                        set[i] = set[i].Replace("#", " ");
+                    }
                     newValues.Add(set[i]);
                 }
                 
