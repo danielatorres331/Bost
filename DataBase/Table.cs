@@ -35,7 +35,7 @@ namespace BostDB
         }
 
         //Returns the column whose index is passed by parameter
-        public Column GetColumn(int index) 
+        public Column GetColumn(int index)
         {
             return Columns[index];
         }
@@ -46,9 +46,9 @@ namespace BostDB
         //Adds the values of the list passed by parameter to the columns of the table
         public void AddRow(List<String> values)
         {
-            for(int i=0; i < Columns.Count; i++)
+            for (int i = 0; i < Columns.Count; i++)
             {
-                if(i < values.Count) //If values has more values
+                if (i < values.Count) //If values has more values
                 {
                     Columns[i].AddValue(values[i]);
                 }
@@ -64,9 +64,9 @@ namespace BostDB
         public Column SearchColumnByName(String name)
         {
             Column column1 = null;
-            foreach(Column column in Columns)
+            foreach (Column column in Columns)
             {
-                if(column.GetName() == name)
+                if (column.GetName() == name)
                 {
                     column1 = column;
                     break;
@@ -74,18 +74,19 @@ namespace BostDB
             }
             return column1;
         }
-        public int GetNumColumns() {
+        public int GetNumColumns()
+        {
 
             return Columns.Count;
-           
+
         }
-        public List<Column> GetColumns()        
+        public List<Column> GetColumns()
         {
             return this.Columns;
         }
         public void Save(string folder)
         {
-            foreach(Column column in Columns)
+            foreach (Column column in Columns)
             {
                 string txtName = column.GetName() + ".txt";
                 string pathString = System.IO.Path.Combine(folder, txtName);
@@ -94,16 +95,16 @@ namespace BostDB
             }
         }
         /**/
-        public Table Select(List<Column> columns) 
+        public Table Select(List<Column> columns)
         {
             Table newTable = new Table("newTable");
 
-            foreach (Column column in columns) 
+            foreach (Column column in columns)
             {
-                newTable.AddColumn(column);            
+                newTable.AddColumn(column);
             }
             return newTable;
-        
+
         }
         public Table SelectAll()
         {
@@ -114,8 +115,74 @@ namespace BostDB
             foreach (Column column in columnsTable)
             {
                 newTable.AddColumn(column);
-            }            
+            }
             return newTable;
+        }
+        public List<int> SelectCondition(string m_column, string m_operator, string m_value)
+        {
+            List<int> index = new List<int>();
+            Column column = null;
+            foreach (Column col in Columns)
+            {
+                if (m_column == col.GetName())
+                {
+                    column = col;
+                }
+
+            }
+            List<string> values = column.GetValues();
+            if (m_operator == "<")
+            {
+                foreach (string v in values)
+                {
+                    if (v.CompareTo(m_value) < 0)
+                    {
+                        index.Add(column.GetIndex(m_value));
+                    }
+                }
+            }
+            else if (m_operator == ">")
+            {
+                foreach (string v in values)
+                {
+                    if (v.CompareTo(m_value) > 0)
+                    {
+                        index.Add(column.GetIndex(m_value));
+                    }
+                }
+
+            }
+            else if (m_operator == "<=")
+            {
+                foreach (string v in values)
+                {
+                    if (v.CompareTo(m_value) < 0 || v.CompareTo(m_value) == 0)
+                    {
+                        index.Add(column.GetIndex(m_value));
+                    }
+                }
+            }
+            else if (m_operator == ">=")
+            {
+                foreach (string v in values)
+                {
+                    if (v.CompareTo(m_value) > 0 || v.CompareTo(m_value) == 0)
+                    {
+                        index.Add(column.GetIndex(m_value));
+                    }
+                }
+            }
+            else
+            {
+                foreach (string v in values)
+                {
+                    if (v.CompareTo(m_value) == 0)
+                    {
+                        index.Add(column.GetIndex(m_value));
+                    }
+                }
+            }
+            return index;
         }
     }
 }

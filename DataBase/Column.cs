@@ -62,6 +62,15 @@ namespace BostDB
                 }      
             }
             return i;
+            int j;
+            for ( j = 0; j< ValuesList.Count; j++)
+            {
+                if (ValuesList[j] == value) 
+                {
+                    break;
+                }      
+            }
+            return j;
         }
 
         public List<int> GetIndexes(String value)
@@ -85,6 +94,10 @@ namespace BostDB
             }
 
             return text;
+        }
+        public List<String> GetValues() 
+        {
+            return ValuesList;
         }
     }
 }

@@ -21,10 +21,13 @@ namespace BostDB.MiniSqlParser
         }
         public string Run(DataBase database)
         {
+
             Table table = database.SearchTableByName(m_table);
             return table.SelectAll().ToString();
+           
           
         }
 
-     }
+    
+    }
 }

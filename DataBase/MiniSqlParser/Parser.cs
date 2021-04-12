@@ -46,8 +46,14 @@ namespace BostDB.MiniSqlParser
             if (match.Success)
             {
                 string[] values = match.Groups[2].Value.Split(',');
+                List<String> listValues = new List<string>();
 
-                Insert insert = new Insert(match.Groups[1].Value, values);
+                foreach (string v in values)
+                {
+                    listValues.Add(v);
+                }
+
+                Insert insert = new Insert(match.Groups[1].Value, listValues);
                 return insert;
             }
 
