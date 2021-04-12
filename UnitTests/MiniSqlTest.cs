@@ -16,7 +16,7 @@ namespace UnitTests
             Assert.AreEqual("Table1", (query as SelectAll).Table());
         }
 
-       /* [TestMethod]
+       [TestMethod]
         public void TestInsert()
         {
             IQuery query = Parser.Parse("INSERT INTO Table VALUES (34567);"); 
@@ -38,7 +38,7 @@ namespace UnitTests
            Assert.AreEqual("Table1", (query as Delete).Table());
            Assert.AreEqual("value", (query as Delete).Column());
            
-        }*/
+        }
 
         [TestMethod]
         public void TestUpdate(){
