@@ -141,7 +141,7 @@ namespace UnitTests
         {
             IQuery query = Parser.Parse("DROP TABLE tableName;");
             Assert.IsTrue(query is DropTable);
-            //Assert.IsNull((query as DropTable).Table());
+            Assert.AreEqual("tableName", (query as DropTable).Table());
         }
     }
 }
