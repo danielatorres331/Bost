@@ -39,7 +39,7 @@ namespace BostDB.MiniSqlParser
 
 
         }
-        //NO ESTA SUBIDOOOOOOOOOOOOOO !!!!!!!!!!! SOLO ESTA EN MI ORDENADOR 
+       
         public string Run(DataBase database)
         {
             Table t = database.SearchTableByName(m_table);
