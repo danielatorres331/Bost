@@ -46,23 +46,25 @@ namespace BostDB.MiniSqlParser
 
             if (t == null)
             {
-                return "error";
+                return Messages.TableDoesNotExist;
             }
             else
             {
                 List<int> index = t.SelectCondition(m_column,m_operator,m_value);
                 Column c = t.SearchColumnByName(m_column);
+                List<Column> columns = t.GetColumns();
                 if (c == null) 
                 {
-                    return "error";
+                    return Messages.ColumnDoesNotExist;
                 }
                 else
                 {
                 foreach (int i in index)
                 {
-                    c.DeleteValue(i);
+                    foreach (Column column in columns)
+                        column.DeleteValue(i);
                 }
-                return  "mensage";
+                return Messages.TupleDeleteSuccess;
                 }
                
             }

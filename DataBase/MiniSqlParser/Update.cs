@@ -46,7 +46,7 @@ namespace BostDB.MiniSqlParser
                 }
             }
 
-            return "update done";
+            return Messages.TupleUpdateSuccess;
         }
 
         public string GetTable()

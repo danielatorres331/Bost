@@ -184,5 +184,35 @@ namespace BostDB
             }
             return index;
         }
+
+        public override string ToString()
+        {
+            string toString = "[";
+
+            for(int i = 0; i < Columns.Count; i++)
+            {
+                if (i != Columns.Count - 1)
+                    toString += Columns[i].GetName() + ", ";
+                else
+                    toString += Columns[i].GetName() + "]";
+            }
+
+            int values = Columns[0].GetValues().Count;
+
+            for(int i = 0; i < values; i++)
+            {
+                for(int j = 0; j < Columns.Count; j++)
+                {
+                    if(j == 0)
+                        toString += "{";
+
+                    if (j != Columns.Count - 1)
+                        toString += Columns[j].GetValue(i) + ", ";
+                    else
+                        toString += Columns[j].GetValue(i) + "}";
+                }
+            }
+            return toString;
+        }
     }
 }

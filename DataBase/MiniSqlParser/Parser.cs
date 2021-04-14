@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace BostDB.MiniSqlParser
 {
-   public static class Parser
+   public class Parser
     {
         public static IQuery Parse(string miniSqlSentence)
         {
-            const string selectAllPattern = @"SELECT \* FROM ([a-zA-Z0-9]+)";
-            const string selectColumnsPattern = @"SELECT ([a-zA-Z0-9,]+) FROM ([a-zA-Z0-9]+)";
+            const string selectAllPattern = @"SELECT \* FROM ([a-zA-Z0-9]+);";
+            const string selectColumnsPattern = @"SELECT ([a-zA-Z0-9]+)((,[a-zA-Z0-9]+)+) FROM ([a-zA-Z0-9]+)(;| WHERE ([a-zA-Z0-9.]+)([<>=]{1,2})([a-zA-Z0-9.]+);)";
             const string deletePattern = @"DELETE FROM ([a-zA-Z0-9.]+) WHERE ([a-zA-Z0-9.]+)([<>=]{1,2})([a-zA-Z0-9.]+);";
             const string insertPattern = @"INSERT INTO ([a-zA-Z0-9]+) VALUES \(([^\)]+)\);";
             const string updatePattern = @"UPDATE ([a-zA-Z0-9]+) SET ([^\s]+) WHERE ([^\s]+);";
@@ -36,13 +36,13 @@ namespace BostDB.MiniSqlParser
                 string[] columnNames = match.Groups[1].Value.Split(',');
 
                 //Gets a collection of groups matched by the regular expression
-                SelectColumns selectColumns = new SelectColumns(match.Groups[2].Value, columnNames);
+                SelectColumns selectColumns = new SelectColumns(match.Groups[2].Value, columnNames.OfType<string>().ToList(), match.Groups[5].Value, match.Groups[6].Value, match.Groups[7].Value);
                 return selectColumns;
             }
             else if (Regex.Match(miniSqlSentence, deletePattern).Success)
             {
                 match = Regex.Match(miniSqlSentence, deletePattern);
-                Delete deleteValue = new Delete(match.Groups[1].Value, match.Groups[2].Value,match.Groups[3].Value, match.Groups[4].Value);
+                Delete deleteValue = new Delete(match.Groups[1].Value, match.Groups[2].Value, match.Groups[3].Value, match.Groups[4].Value);
                 return deleteValue;
             }
             else if (Regex.Match(miniSqlSentence, insertPattern).Success)
@@ -59,7 +59,7 @@ namespace BostDB.MiniSqlParser
                 Insert insert = new Insert(match.Groups[1].Value, listValues);
                 return insert;
             }
-            else if(Regex.Match(miniSqlSentence, updatePattern).Success)
+            else if (Regex.Match(miniSqlSentence, updatePattern).Success)
             {
                 match = Regex.Match(miniSqlSentence, updatePattern);
                 List<string> columns = new List<string>(), //Save columns
@@ -67,20 +67,20 @@ namespace BostDB.MiniSqlParser
                     columnsName = new List<string>(), //Save the name of the column 
                     valuesToUpdate = new List<string>(); //Save values where we want to update
 
-                string[] set = match.Groups[2].Value.Split(',','=');
+                string[] set = match.Groups[2].Value.Split(',', '=');
                 for (int i = 0; i < set.Length; i++)
                 {
                     columns.Add(set[i]);
                     i++;
-                    
+
                     if (set[i].Contains("#"))
                     {
                         set[i] = set[i].Replace("#", " ");
                     }
                     newValues.Add(set[i]);
                 }
-                
-                string[] where = match.Groups[3].Value.Split(',','=');
+
+                string[] where = match.Groups[3].Value.Split(',', '=');
                 for (int i = 0; i < where.Length; i++)
                 {
                     columnsName.Add(where[i]);
@@ -99,8 +99,8 @@ namespace BostDB.MiniSqlParser
                 List<String> columns = new List<String>();
 
                 string[] columnsPattern = match.Groups[3].Value.Split(',');
-                
-                for(int i = 0; i < columnsPattern.Length; i++)
+
+                for (int i = 0; i < columnsPattern.Length; i++)
                 {
                     String column = columnsPattern[i];
                     int index;
@@ -110,13 +110,13 @@ namespace BostDB.MiniSqlParser
                         column = column.Remove(index, 1);
 
                     index = column.IndexOf(' ');
-                    if(index != -1)
+                    if (index != -1)
                         column = column.Remove(index);
 
                     index = column.IndexOf(')');
                     if (index != -1)
                         column = column.Remove(index, 1);
-                    
+
                     columns.Add(column);
                 }
                 CreateTable createTable = new CreateTable(tableName, columns);
@@ -129,8 +129,8 @@ namespace BostDB.MiniSqlParser
                 DropTable dropTable = new DropTable(match.Groups[1].Value);
                 return dropTable; ;
             }
-
-            return null;
+            else
+                return null;
         }
     }
 }
