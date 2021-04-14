@@ -3,6 +3,7 @@ using System;
 using BostDB;
 using BostDB.MiniSqlParser;
 using System.Collections.Generic;
+using Bost.MiniSqlParser;
 
 namespace UnitTests
 {
@@ -96,5 +97,42 @@ namespace UnitTests
             Assert.AreEqual("5", valuesToUpdateParse[0]);
         }
 
+        [TestMethod]
+        public void TestCreateTable()
+        {
+            IQuery query = (CreateTable)Parser.Parse("CREATE TABLE table1 (nombre TEXT);");
+            IQuery query2 = (CreateTable)Parser.Parse("CREATE TABLE table2 (edad INT);");
+            IQuery query3 = (CreateTable)Parser.Parse("CREATE TABLE table3 (nombre TEXT,edad INT);");
+
+            Assert.IsTrue(query is CreateTable);
+            Assert.IsTrue(query2 is CreateTable);
+            Assert.IsTrue(query3 is CreateTable);
+
+            Assert.AreEqual("table1", (query as CreateTable).GetTable());
+            Assert.AreEqual("table2", (query2 as CreateTable).GetTable());
+            Assert.AreEqual("table3", (query3 as CreateTable).GetTable());
+
+            List<string> columns = new List<string>();
+            columns.Add("nombre");
+            List<string> columnsParse = (query as CreateTable).GetColumns();
+            Assert.AreEqual(columns.Count, columnsParse.Count);
+            for (int i = 0; i < columns.Count; i++)
+                Assert.AreEqual(columns[i], columnsParse[i]);
+
+            List<string> columns2 = new List<string>();
+            columns2.Add("edad");
+            List<string> columnsParse2 = (query2 as CreateTable).GetColumns();
+            Assert.AreEqual(columns2.Count, columnsParse2.Count);
+            for (int i = 0; i < columns2.Count; i++)
+                Assert.AreEqual(columns2[i], columnsParse2[i]);
+
+            List<string> columns3 = new List<string>();
+            columns3.Add("nombre");
+            columns3.Add("edad");
+            List<string> columnsParse3 = (query3 as CreateTable).GetColumns();
+            Assert.AreEqual(columns3.Count, columnsParse3.Count);
+            for (int i = 0; i < columns3.Count; i++)
+                Assert.AreEqual(columns3[i], columnsParse3[i]);
+        }
     }
 }
