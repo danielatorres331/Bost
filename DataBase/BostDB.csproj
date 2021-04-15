@@ -49,6 +49,10 @@
     <Compile Include="Messages.cs" />
     <Compile Include="Column.cs" />
     <Compile Include="DataBase.cs" />
+    <Compile Include="MiniSqlParser\CreateSecurityProfile.cs" />
+    <Compile Include="MiniSqlParser\GrantSelect.cs" />
+    <Compile Include="MiniSqlParser\AddUser.cs" />
+    <Compile Include="MiniSqlParser\CreateDataBase.cs" />
     <Compile Include="MiniSqlParser\CreateTable.cs" />
     <Compile Include="MiniSqlParser\DropTable.cs" />
     <Compile Include="MiniSqlParser\Update.cs" />

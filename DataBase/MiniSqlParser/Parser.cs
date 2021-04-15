@@ -20,6 +20,10 @@ namespace BostDB.MiniSqlParser
             const string updatePattern = @"UPDATE ([a-zA-Z0-9]+) SET ([^\s]+) WHERE ([^\s]+);";
             const string dropTablePattern = @"DROP TABLE ([a-zA-Z0-9]+);";
             const string createTablePattern = @"CREATE TABLE (([a-zA-Z0-9]+)) (\((([^\s]+) (TEXT|INT|DOUBLE),?)+\));";
+            const string createDataBasePattern = @"([a-zA-Z0-9]+),([a-zA-Z0-9]+),([a-zA-Z0-9]+)";
+            const string createSecurityProfilePattern = @"CREATE SECURITY PROFILE ([a-zA-Z0-9]+);";
+            const string grantSelectPattern = @"GRANT SELECT ON ([a-zA-Z0-9]+) TO ([a-zA-Z0-9]+);";
+            const string addUserPattern = @"ADD USER \((([a-zA-Z0-9']+),([a-zA-Z0-9']+),([a-zA-Z0-9']+))\);";
 
             Match match;
 
@@ -130,6 +134,34 @@ namespace BostDB.MiniSqlParser
                 match = Regex.Match(miniSqlSentence, dropTablePattern);
                 DropTable dropTable = new DropTable(match.Groups[1].Value);
                 return dropTable; ;
+            }
+            else if (Regex.Match(miniSqlSentence, createSecurityProfilePattern).Success)
+            {
+                match = Regex.Match(miniSqlSentence, createSecurityProfilePattern);
+
+                CreateSecurityProfile createSecurityProfile = new CreateSecurityProfile(match.Groups[1].Value);
+                return createSecurityProfile;
+            }
+            else if (Regex.Match(miniSqlSentence, grantSelectPattern).Success)
+            {
+                match = Regex.Match(miniSqlSentence, grantSelectPattern);
+
+                GrantSelect grantSelect = new GrantSelect(match.Groups[1].Value, match.Groups[2].Value);
+                return grantSelect;
+            }
+            else if (Regex.Match(miniSqlSentence, addUserPattern).Success)
+            {
+                match = Regex.Match(miniSqlSentence, addUserPattern);
+
+                AddUser addUser = new AddUser(match.Groups[2].Value, match.Groups[3].Value, match.Groups[4].Value);
+                return addUser;
+            }
+            else if (Regex.Match(miniSqlSentence, createDataBasePattern).Success)
+            {
+                match = Regex.Match(miniSqlSentence, createDataBasePattern);
+
+                CreateDataBase dataBase = new CreateDataBase(match.Groups[1].Value, match.Groups[2].Value, match.Groups[3].Value);
+                return dataBase;
             }
             else
                 return null;

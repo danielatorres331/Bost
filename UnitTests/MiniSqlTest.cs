@@ -52,7 +52,7 @@ namespace UnitTests
             Assert.AreEqual("18", (query as SelectColumns).GetValue());
         }
 
-            [TestMethod]
+        [TestMethod]
         public void TestInsert()
         {
             IQuery query = Parser.Parse("INSERT INTO Table VALUES (34567);");
@@ -68,8 +68,8 @@ namespace UnitTests
             Assert.AreEqual("bye", (query1 as Insert).Values()[2]);
         }
 
-       [TestMethod]
-       public void TestDelete()
+        [TestMethod]
+        public void TestDelete()
         {
            IQuery query = Parser.Parse("DELETE FROM Table1 WHERE value=34567;");
            Assert.IsTrue(query is Delete);
@@ -177,6 +177,51 @@ namespace UnitTests
             IQuery query = Parser.Parse("DROP TABLE tableName;");
             Assert.IsTrue(query is DropTable);
             Assert.AreEqual("tableName", (query as DropTable).Table());
+        }
+
+        [TestMethod]
+        public void TestCreateDataBase()
+        {
+            IQuery query = Parser.Parse("DataBase1,BostDB,password");
+            
+            Assert.IsTrue(query is CreateDataBase);
+            
+            Assert.AreEqual("DataBase1", (query as CreateDataBase).GetName());
+            Assert.AreEqual("BostDB", (query as CreateDataBase).GetUser());
+            Assert.AreEqual("password", (query as CreateDataBase).GetPassword());
+        }
+
+        [TestMethod]
+        public void TestCreateSecurityProfile()
+        {
+            IQuery query = Parser.Parse("CREATE SECURITY PROFILE Student;");
+
+            Assert.IsTrue(query is CreateSecurityProfile);
+
+            Assert.AreEqual("Student", (query as CreateSecurityProfile).GetUser());
+        }
+
+        [TestMethod]
+        public void TestGrantSelect()
+        {
+            IQuery query = Parser.Parse("GRANT SELECT ON StudentPublic TO Student;");
+
+            Assert.IsTrue(query is GrantSelect);
+
+            Assert.AreEqual("StudentPublic", (query as GrantSelect).GetPermission());
+            Assert.AreEqual("Student",(query as GrantSelect).GetUser());
+        }
+
+        [TestMethod]
+        public void TestAddUser()
+        {
+            IQuery query = Parser.Parse("ADD USER (Carolina,1711,Student);");
+
+            Assert.IsTrue(query is AddUser);
+
+            Assert.AreEqual("Carolina", (query as AddUser).GetUser());
+            Assert.AreEqual("1711", (query as AddUser).GetPassword());
+            Assert.AreEqual("Student", (query as AddUser).GetProfileName());
         }
     }
 }
