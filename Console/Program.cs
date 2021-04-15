@@ -27,18 +27,20 @@ namespace Console
                     IQuery query = Parser.Parse(line);
                     if (query != null)
                     {
-                        System.Console.WriteLine(query.Run(dataBase) + "    (" + stopwatch.Elapsed.TotalSeconds.ToString("0.00 s") + ")");
-                        time += stopwatch.Elapsed.TotalSeconds;
+                        stopwatch.Restart();
+                        System.Console.WriteLine(query.Run(dataBase) + "    (" + (stopwatch.Elapsed.TotalMilliseconds).ToString("0.0000 ms") + ")");
+                        time += stopwatch.Elapsed.TotalMilliseconds;
                     }
                     else
                     {
-                        System.Console.WriteLine(Messages.WrongSyntax);
+                        System.Console.WriteLine(Messages.WrongSyntax + "    (" + (stopwatch.Elapsed.TotalMilliseconds).ToString("0.0000 ms") + ")");
+                        time += stopwatch.Elapsed.TotalMilliseconds;
                     }
 
                 }
                 else 
                 {
-                    System.Console.WriteLine("TOTAL TIME: " + time.ToString("0.00 s"));
+                    System.Console.WriteLine("TOTAL TIME: " + time.ToString("0.0000 ms"));
                     index++;
                     dataBase = new DataBase("DataBase" + index.ToString(), "Bost", "contraseña");
                     System.Console.WriteLine("");
@@ -47,7 +49,7 @@ namespace Console
                 }
 
             }
-            System.Console.WriteLine("TOTAL TIME: " + time.ToString("0.00 s"));
+            System.Console.WriteLine("TOTAL TIME: " + time.ToString("0.0000 ms"));
             stopwatch.Stop();
         }
     }
