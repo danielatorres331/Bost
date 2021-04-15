@@ -138,7 +138,7 @@ namespace BostDB
                 {
                     if (v.CompareTo(m_value) < 0)
                     {
-                        index.Add(column.GetIndex(v));
+                        index.Add(checkValues(index, column.GetIndexes(v)));
                     }
                 }
             }
@@ -148,7 +148,7 @@ namespace BostDB
                 {
                     if (v.CompareTo(m_value) > 0)
                     {
-                        index.Add(column.GetIndex(v));
+                        index.Add(checkValues(index, column.GetIndexes(v)));
                     }
                 }
 
@@ -159,7 +159,7 @@ namespace BostDB
                 {
                     if (v.CompareTo(m_value) < 0 || v.CompareTo(m_value) == 0)
                     {
-                        index.Add(column.GetIndex(v));
+                        index.Add(checkValues(index, column.GetIndexes(v)));
                     }
                 }
             }
@@ -169,7 +169,7 @@ namespace BostDB
                 {
                     if (v.CompareTo(m_value) > 0 || v.CompareTo(m_value) == 0)
                     {
-                        index.Add(column.GetIndex(v));
+                        index.Add(checkValues(index, column.GetIndexes(v)));
                     }
                 }
             }
@@ -179,11 +179,24 @@ namespace BostDB
                 {
                     if (v.CompareTo(m_value) == 0)
                     {
-                        index.Add(column.GetIndex(v));
+                        index.Add(checkValues(index, column.GetIndexes(v)));
                     }
                 }
             }
             return index;
+        }
+
+        private int checkValues(List<int> indexes, List<int> newIndexes)
+        {
+            int ind = 0;
+            foreach(int index in newIndexes){
+                if (!indexes.Contains(index))
+                {
+                    ind = index;
+                    break;
+                }
+            }
+            return ind;
         }
 
         public override string ToString()

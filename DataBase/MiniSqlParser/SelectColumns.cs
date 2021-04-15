@@ -74,6 +74,7 @@ namespace BostDB.MiniSqlParser
                         col = new Column(column.GetName()); //Create the column
                         names = m_columnNames; //Add the name of the column to a List with names
                         columns.Add(col); //Add column to a List of columns
+                        
                         foreach (int index in indexes)
                         {
                             col.AddValue(column.GetValue(index));//Get value of the of the index
