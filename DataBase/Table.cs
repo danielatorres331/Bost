@@ -127,6 +127,7 @@ namespace BostDB
                 if (m_column == col.GetName())
                 {
                     column = col;
+                    break;
                 }
 
             }
@@ -191,7 +192,7 @@ namespace BostDB
 
             for(int i = 0; i < Columns.Count; i++)
             {
-                if (i != Columns.Count - 1)
+                if (i < Columns.Count - 1)
                     toString += Columns[i].GetName() + ", ";
                 else
                     toString += Columns[i].GetName() + "]";

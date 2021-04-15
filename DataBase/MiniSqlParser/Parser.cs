@@ -14,12 +14,12 @@ namespace BostDB.MiniSqlParser
         public static IQuery Parse(string miniSqlSentence)
         {
             const string selectAllPattern = @"SELECT \* FROM ([a-zA-Z0-9]+);";
-            const string selectColumnsPattern = @"SELECT ([a-zA-Z0-9]+)((,[a-zA-Z0-9]+)+) FROM ([a-zA-Z0-9]+)(;| WHERE ([a-zA-Z0-9.]+)([<>=]{1,2})([a-zA-Z0-9.]+);)";
+            const string selectColumnsPattern = @"SELECT (([a-zA-Z0-9]+)((,[a-zA-Z0-9]+){0,})) FROM ([a-zA-Z0-9]+)(;| WHERE ([a-zA-Z0-9.]+)([<>=]{1,2})([a-zA-Z0-9.]+);)";
             const string deletePattern = @"DELETE FROM ([a-zA-Z0-9.]+) WHERE ([a-zA-Z0-9.]+)([<>=]{1,2})([a-zA-Z0-9.]+);";
             const string insertPattern = @"INSERT INTO ([a-zA-Z0-9]+) VALUES \(([^\)]+)\);";
             const string updatePattern = @"UPDATE ([a-zA-Z0-9]+) SET ([^\s]+) WHERE ([^\s]+);";
             const string dropTablePattern = @"DROP TABLE ([a-zA-Z0-9]+);";
-            const string createTablePattern = @"CREATE TABLE (([a-zA-Z0-9]+)) (\((([^\s]+) (TEXT|INT),?)+\));";
+            const string createTablePattern = @"CREATE TABLE (([a-zA-Z0-9]+)) (\((([^\s]+) (TEXT|INT|DOUBLE),?)+\));";
 
             Match match;
 
@@ -36,7 +36,7 @@ namespace BostDB.MiniSqlParser
                 string[] columnNames = match.Groups[1].Value.Split(',');
 
                 //Gets a collection of groups matched by the regular expression
-                SelectColumns selectColumns = new SelectColumns(match.Groups[2].Value, columnNames.OfType<string>().ToList(), match.Groups[5].Value, match.Groups[6].Value, match.Groups[7].Value);
+                SelectColumns selectColumns = new SelectColumns(match.Groups[5].Value, columnNames.OfType<string>().ToList(), match.Groups[7].Value, match.Groups[8].Value, match.Groups[9].Value);
                 return selectColumns;
             }
             else if (Regex.Match(miniSqlSentence, deletePattern).Success)
@@ -49,14 +49,8 @@ namespace BostDB.MiniSqlParser
             {
                 match = Regex.Match(miniSqlSentence, insertPattern);
                 string[] values = match.Groups[2].Value.Split(',');
-                List<String> listValues = new List<string>();
 
-                foreach (string v in values)
-                {
-                    listValues.Add(v);
-                }
-
-                Insert insert = new Insert(match.Groups[1].Value, listValues);
+                Insert insert = new Insert(match.Groups[1].Value, values.OfType<string>().ToList());
                 return insert;
             }
             else if (Regex.Match(miniSqlSentence, updatePattern).Success)

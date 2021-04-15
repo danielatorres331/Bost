@@ -17,7 +17,42 @@ namespace UnitTests
             Assert.AreEqual("Table1", (query as SelectAll).Table());
         }
 
-       [TestMethod]
+        [TestMethod]
+        public void TestSelect()
+        {
+            IQuery query = Parser.Parse("SELECT Name,Age FROM MyTable;");
+            Assert.AreEqual("MyTable", (query as SelectColumns).GetTable());
+
+            List<string> columns = new List<string>();
+            columns.Add("Name");
+            columns.Add("Age");
+            List<string> cols = (query as SelectColumns).GetColumnNames();
+            Assert.AreEqual(cols.Count, columns.Count);
+            for(int i = 0; i < cols.Count; i++)
+            {
+                Assert.AreEqual(cols[i], columns[i]);
+            }
+            Assert.AreEqual("", (query as SelectColumns).GetColumn());
+            Assert.AreEqual("", (query as SelectColumns).GetOperador());
+            Assert.AreEqual("", (query as SelectColumns).GetValue());
+
+            query = Parser.Parse("SELECT Name,Age FROM MyTable WHERE Age>18;");
+            Assert.AreEqual("MyTable", (query as SelectColumns).GetTable());
+            List<string> columns2 = new List<string>();
+            columns2.Add("Name");
+            columns2.Add("Age");
+            List<string> cols2 = (query as SelectColumns).GetColumnNames();
+            Assert.AreEqual(cols2.Count, columns2.Count);
+            for (int i = 0; i < cols2.Count; i++)
+            {
+                Assert.AreEqual(cols2[i], columns2[i]);
+            }
+            Assert.AreEqual("Age", (query as SelectColumns).GetColumn());
+            Assert.AreEqual(">", (query as SelectColumns).GetOperador());
+            Assert.AreEqual("18", (query as SelectColumns).GetValue());
+        }
+
+            [TestMethod]
         public void TestInsert()
         {
             IQuery query = Parser.Parse("INSERT INTO Table VALUES (34567);");
