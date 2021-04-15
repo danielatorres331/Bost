@@ -27,7 +27,15 @@ namespace BostDB.MiniSqlParser
             {
                 match = Regex.Match(miniSqlSentence, selectAllPattern);
                 //Gets a collection of groups matched by the regular expression
-                SelectAll selectAll = new SelectAll(match.Groups[1].Value);
+                SelectAll selectAll;
+                if (match.Groups[2].Value == null)
+                {
+                   selectAll = new SelectAll(match.Groups[1].Value);
+                }
+                else 
+                {
+                   selectAll = new SelectAll(match.Groups[1].Value, match.Groups[2].Value, match.Groups[3].Value, match.Groups[4].Value);
+                }               
                 return selectAll;
             }
             else if (Regex.Match(miniSqlSentence, selectColumnsPattern).Success)
