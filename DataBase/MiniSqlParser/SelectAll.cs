@@ -36,36 +36,39 @@ namespace BostDB.MiniSqlParser
         public string Run(DataBase database)
         {
             Table table = database.SearchTableByName(m_table);
-            Column c = table.SearchColumnByName(m_column);
 
-            if (table != null || c == null)
+            if (table != null)
             {
-                return table.SelectAll().ToString();
-            }            
-            else if (c != null || table !=null)
-            {
-                List<int> index = table.SelectCondition(m_column, m_operator, m_value);
-                List<Column> columns = table.GetColumns();
-                Table t = new Table("newTable");               
-
-                //Create a new table with the same columns
-                foreach(Column column0 in columns)
+                Column c = table.SearchColumnByName(m_column);
+                if (c == null)
                 {
-                    t.AddColumn(column0);
-                }      
-                
-                foreach (int i in index)
-                {
-                    List<string> values = new List<string>();
-                    //Collect the values of each index
-                    foreach (Column column in columns)
-                    {
-                        values.Add(column.GetValue(i));
-                    }
-                    //Add the list of values to the new table
-                    t.AddRow(values);
+                    return table.SelectAll().ToString();
                 }
-                return t.ToString();
+                else
+                {
+                    List<int> index = table.SelectCondition(m_column, m_operator, m_value);
+                    List<Column> columns = table.GetColumns();
+                    Table t = new Table("newTable");
+
+                    //Create a new table with the same columns
+                    foreach (Column column0 in columns)
+                    {
+                        t.AddColumn(column0);
+                    }
+
+                    foreach (int i in index)
+                    {
+                        List<string> values = new List<string>();
+                        //Collect the values of each index
+                        foreach (Column column in columns)
+                        {
+                            values.Add(column.GetValue(i));
+                        }
+                        //Add the list of values to the new table
+                        t.AddRow(values);
+                    }
+                    return t.ToString();
+                }
             }
             else
             {
