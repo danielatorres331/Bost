@@ -41,8 +41,7 @@ namespace BostDB.MiniSqlParser
             if (table != null || c == null)
             {
                 return table.SelectAll().ToString();
-            }
-            
+            }            
             else if (c != null || table !=null)
             {
                 List<int> index = table.SelectCondition(m_column, m_operator, m_value);
