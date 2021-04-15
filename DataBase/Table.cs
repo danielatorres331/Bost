@@ -138,7 +138,7 @@ namespace BostDB
                 {
                     if (v.CompareTo(m_value) < 0)
                     {
-                        index.Add(column.GetIndex(m_value));
+                        index.Add(column.GetIndex(v));
                     }
                 }
             }
@@ -148,7 +148,7 @@ namespace BostDB
                 {
                     if (v.CompareTo(m_value) > 0)
                     {
-                        index.Add(column.GetIndex(m_value));
+                        index.Add(column.GetIndex(v));
                     }
                 }
 
@@ -159,7 +159,7 @@ namespace BostDB
                 {
                     if (v.CompareTo(m_value) < 0 || v.CompareTo(m_value) == 0)
                     {
-                        index.Add(column.GetIndex(m_value));
+                        index.Add(column.GetIndex(v));
                     }
                 }
             }
@@ -169,7 +169,7 @@ namespace BostDB
                 {
                     if (v.CompareTo(m_value) > 0 || v.CompareTo(m_value) == 0)
                     {
-                        index.Add(column.GetIndex(m_value));
+                        index.Add(column.GetIndex(v));
                     }
                 }
             }
@@ -179,7 +179,7 @@ namespace BostDB
                 {
                     if (v.CompareTo(m_value) == 0)
                     {
-                        index.Add(column.GetIndex(m_value));
+                        index.Add(column.GetIndex(v));
                     }
                 }
             }
