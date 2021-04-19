@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace BostDB.MiniSqlParser
 {
-    class Delete : IQuery
+    public class Delete : IQuery
     {
         private string m_table;
         private string m_column;
-        private string m_operador;
+        private string m_operator;
         private string m_value;
 
         public string Table()
@@ -22,18 +22,55 @@ namespace BostDB.MiniSqlParser
         {
             return m_column;
         }
+        public string Operator()
+        {
+            return m_operator;
+        }
+        public string Value()
+        {
+            return m_value;
+        }
         public Delete(string table, string column, string operador, string value)
         {
             m_table = table;
             m_column = column;
-            m_operador = operador ;
+            m_operator = operador;
             m_value = value;
 
 
         }
-        public string Run(BostDB.DataBase database)
+       
+        public string Run(DataBase database)
         {
-            return null;
+            Table t = database.SearchTableByName(m_table);
+
+            if (t == null)
+            {
+                return Messages.TableDoesNotExist;
+            }
+            else
+            {
+                
+                Column c = t.SearchColumnByName(m_column);
+                
+                if (c == null) 
+                {
+                    return Messages.ColumnDoesNotExist;
+                }
+                else
+                {
+                    List<int> index = t.SelectCondition(m_column, m_operator, m_value);
+                    List<Column> columns = t.GetColumns();
+                    foreach (int i in index)
+                {
+                    foreach (Column column in columns)
+                        column.DeleteValue(i);
+                }
+                return Messages.TupleDeleteSuccess;
+                }
+               
+            }
+            
         }
     }
 }

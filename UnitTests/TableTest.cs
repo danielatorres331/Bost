@@ -111,6 +111,54 @@ namespace UnitTests
             Assert.AreEqual(0, table10.GetNumColumns());
         }
 
+        [TestMethod]
+        public void TestGetColumns()
+        {
+            Table t = new Table("Fruits");
+            Column fc = new Column("FirstColumn");
+            Column sc = new Column("SecondColumn");
+            fc.AddValue("Banana");
+            sc.AddValue("Peach");
+            t.AddColumn(fc);
+            t.AddColumn(sc);
+
+            List<Column> columnsTable = new List<Column>();
+            columnsTable = t.GetColumns();
+
+            Assert.IsTrue(columnsTable.Contains(fc));
+            Assert.IsTrue(columnsTable.Contains(sc));
+
+            Assert.AreEqual(2, columnsTable.Count);
+
+
+
+        }
+
+        [TestMethod]
+        public void TestSelect()
+        {
+            Table table10 = new Table("TableName");
+            Column c1 = new Column("c1");
+            Column c2 = new Column("c2");
+            table10.AddColumn(c1);
+            table10.AddColumn(c2);
+
+
+
+
+    }
+
+        [TestMethod]
+        public void TestSelectAll()
+        {
+            Table table11 = new Table("TableName");
+            Column c11 = new Column("c11");
+            Column c22 = new Column("c22");
+            table11.AddColumn(c11);
+            table11.AddColumn(c22);
+
+            
+        }
 
     }
 }

@@ -27,26 +27,30 @@ namespace BostDB.MiniSqlParser
         {
             BostDB.Table table = database.SearchTableByName(m_table);
             List<int> indexes = new List<int>();
-            
-            //Find the indexes where we want to update
-            for (int i = 0; i < m_columnsNamesToUpdate.Count; i++)
+            if (table != null)
             {
-                BostDB.Column column = table.SearchColumnByName(m_columnsNamesToUpdate[i]);
-                indexes = column.GetIndexes(m_valuesToUpdate[i]);
-            }
-
-            //find columns where we want to update
-            for(int i = 0; i < m_columns.Count; i++)
-            {
-                BostDB.Column column = table.SearchColumnByName(m_columns[i]);
-                //Set the new values in the indexes
-                for(int j = 0; j < indexes.Count; j++)
+                //Find the indexes where we want to update
+                for (int i = 0; i < m_columnsNamesToUpdate.Count; i++)
                 {
-                    column.SetValue(indexes[j], m_newValues[i]);
+                    BostDB.Column column = table.SearchColumnByName(m_columnsNamesToUpdate[i]);
+                    indexes = column.GetIndexes(m_valuesToUpdate[i]);
                 }
-            }
 
-            return "update done";
+                //find columns where we want to update
+                for (int i = 0; i < m_columns.Count; i++)
+                {
+                    BostDB.Column column = table.SearchColumnByName(m_columns[i]);
+                    //Set the new values in the indexes
+                    for (int j = 0; j < indexes.Count; j++)
+                    {
+                        column.SetValue(indexes[j], m_newValues[i]);
+                    }
+                }
+
+                return Messages.TupleUpdateSuccess;
+            }
+            else
+                return Messages.TableDoesNotExist;
         }
 
         public string GetTable()
