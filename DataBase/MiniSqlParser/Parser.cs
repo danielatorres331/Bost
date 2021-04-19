@@ -24,6 +24,7 @@ namespace BostDB.MiniSqlParser
             const string createSecurityProfilePattern = @"CREATE SECURITY PROFILE ([a-zA-Z0-9]+);";
             const string grantSelectPattern = @"GRANT SELECT ON ([a-zA-Z0-9]+) TO ([a-zA-Z0-9]+);";
             const string addUserPattern = @"ADD USER \((([a-zA-Z0-9']+),([a-zA-Z0-9']+),([a-zA-Z0-9']+))\);";
+            const string dropSecurityProfilePattern = @"DROP SECURITY PROFILE ([a-zA-Z0-9']+);";
 
             Match match;
 
@@ -162,6 +163,13 @@ namespace BostDB.MiniSqlParser
 
                 CreateDataBase dataBase = new CreateDataBase(match.Groups[1].Value, match.Groups[2].Value, match.Groups[3].Value);
                 return dataBase;
+            }
+            else if (Regex.Match(miniSqlSentence, dropSecurityProfilePattern).Success)
+            {
+                match = Regex.Match(miniSqlSentence, dropSecurityProfilePattern);
+
+                DropSecurityProfile dropSecurityProfile = new DropSecurityProfile(match.Groups[1].Value);
+                return dropSecurityProfile;
             }
             else
                 return null;

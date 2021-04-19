@@ -223,5 +223,15 @@ namespace UnitTests
             Assert.AreEqual("1711", (query as AddUser).GetPassword());
             Assert.AreEqual("Student", (query as AddUser).GetProfileName());
         }
+
+        [TestMethod]
+        public void TestDropSecurityProfile()
+        {
+            IQuery query = Parser.Parse("DROP SECURITY PROFILE Student;");
+
+            Assert.IsTrue(query is DropSecurityProfile);
+
+            Assert.AreEqual("Student", (query as DropSecurityProfile).Profile());
+        }
     }
 }
