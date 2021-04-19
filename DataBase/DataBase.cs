@@ -15,7 +15,9 @@ namespace BostDB
         String UserName;
         String Password;
         string pathString;
-       
+
+        List<User> Users = new List<User>(); // create the list empty
+
 
 
         //Constructor
@@ -54,22 +56,7 @@ namespace BostDB
             }
             return tab;
         }
-        //public Table SelectAll(string name) 
-       //{
-       // return null;
-        //}
-       // public Table SelectColumns(string table, List<int> columNames)
-       // {
-           // foreach (Table tab in Tables)
-            //{
-                //if (tab.GetName() == table && tab.GetColumn().Equals(columNames))
-                //{
-              //  }
-            //}
-          //  return null;
-        //}
-
-        // Load database : path, file
+        
         public void Load(string nameDB)
         {
             string dbName = System.IO.Path.Combine(@"/Folder", nameDB);
@@ -111,6 +98,7 @@ namespace BostDB
                 tab.Save(folderName);
             }         
         }
+
         public string GetName()
         {
             return Name;
@@ -127,20 +115,22 @@ namespace BostDB
                     System.IO.File.Create(folderName);
                 }
         }
-        // Read and display the data from your file.
-        //try
-        //{
-        //byte[] readBuffer = System.IO.File.ReadAllBytes(pathString);
-        //    foreach (byte b in readBuffer)
-        // {
-        //Console.Write(b + " ");
-        //}
-        //Console.WriteLine();
-        //}
-        //  catch (System.IO.IOException e) 
-        //{
-        //Console.WriteLine(e.Message);
-   // }
+
+        
+
+        //Save Users
+        public void SaveUsers() {
+            
+            string folderName = System.IO.Path.Combine(pathString);
+            CreateFolder(folderName);
+          
+            foreach (User us in Users)
+            {
+                File.WriteAllText(pathString, us.Save());
+            }
+        }
+
+
 }
 }
   
