@@ -22,8 +22,9 @@ namespace BostDB.MiniSqlParser
             const string createTablePattern = @"CREATE TABLE (([a-zA-Z0-9]+)) (\((([^\s]+) (TEXT|INT|DOUBLE),?)+\));";
             const string createDataBasePattern = @"([a-zA-Z0-9]+),([a-zA-Z0-9]+),([a-zA-Z0-9]+)";
             const string createSecurityProfilePattern = @"CREATE SECURITY PROFILE ([a-zA-Z0-9]+);";
-            const string grantSelectPattern = @"GRANT SELECT ON ([a-zA-Z0-9]+) TO ([a-zA-Z0-9]+);";
+            const string grantPattern = @"GRANT (SELECT|UPDATE|DELETE|INSERT) ON ([a-zA-Z0-9]+) TO ([a-zA-Z0-9]+);";
             const string addUserPattern = @"ADD USER \((([a-zA-Z0-9']+),([a-zA-Z0-9']+),([a-zA-Z0-9']+))\);";
+            const string revokePattern = "REVOKE (SELECT|UPDATE|DELETE|INSERT) ON ([a-zA-Z0-9]+) TO ([a-zA-Z0-9]+);";
 
             Match match;
 
@@ -142,12 +143,12 @@ namespace BostDB.MiniSqlParser
                 CreateSecurityProfile createSecurityProfile = new CreateSecurityProfile(match.Groups[1].Value);
                 return createSecurityProfile;
             }
-            else if (Regex.Match(miniSqlSentence, grantSelectPattern).Success)
+            else if (Regex.Match(miniSqlSentence, grantPattern).Success)
             {
-                match = Regex.Match(miniSqlSentence, grantSelectPattern);
+                match = Regex.Match(miniSqlSentence, grantPattern);
 
-                GrantSelect grantSelect = new GrantSelect(match.Groups[1].Value, match.Groups[2].Value);
-                return grantSelect;
+               GrantPermission grantPermission = new GrantPermission(match.Groups[1].Value, match.Groups[2].Value, match.Groups[3].Value);
+                return grantPermission;
             }
             else if (Regex.Match(miniSqlSentence, addUserPattern).Success)
             {
@@ -162,6 +163,13 @@ namespace BostDB.MiniSqlParser
 
                 CreateDataBase dataBase = new CreateDataBase(match.Groups[1].Value, match.Groups[2].Value, match.Groups[3].Value);
                 return dataBase;
+            }
+            else if (Regex.Match(miniSqlSentence, revokePattern).Success)
+            {
+                match = Regex.Match(miniSqlSentence, revokePattern);
+
+                RevokePermission revokePermission = new RevokePermission(match.Groups[1].Value, match.Groups[2].Value, match.Groups[3].Value);
+                return revokePermission;
             }
             else
                 return null;
