@@ -27,6 +27,7 @@ namespace BostDB
         public const string SecurityPrivilegeRevoked = "Security privilege revoked";
         public const string SecurityUserAdded = "User added to security profile";
        
+
         public const string Error = "ERROR: ";
         
         public const string WrongSyntax = Error + "Syntactical error";
@@ -36,11 +37,17 @@ namespace BostDB
         public const string ColumnDoesNotExist = Error + "Column does not exist";
         public const string IncorrectDataType = Error + "Incorrect data type";
         
+
         public const string SecurityIncorrectLogin = Error + "Incorrect login";
         public const string SecurityNotSufficientPrivileges = Error + "Not sufficient privileges";
         public const string SecurityProfileAlreadyExists = Error + "Security profile already exists";
         public const string SecurityUserAlreadyExists = Error + "Security user already exists";
         public const string SecurityProfileDoesNotExist = Error + "Security profile does not exist";
         public const string SecurityUserDoesNotExist = Error + "Security user does not exist";
+
+        
+
+
+        
     }
 }
