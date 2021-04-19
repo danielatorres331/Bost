@@ -78,8 +78,67 @@ namespace BostDB.MiniSqlParser
                 Update update = new Update(match.Groups[1].Value, columns, newValues, columnsName, valuesToUpdate);
                 return update;
             }
+            else if (Regex.Match(miniSqlSentence, createTablePattern).Success)
+            {
+                match = Regex.Match(miniSqlSentence, createTablePattern);
+                string tableName = match.Groups[2].Value;
 
-            return null;
+                List<String> columns = new List<String>();
+
+                string[] columnsPattern = match.Groups[3].Value.Split(',');
+
+                for (int i = 0; i < columnsPattern.Length; i++)
+                {
+                    String column = columnsPattern[i];
+                    int index;
+
+                    index = column.IndexOf('(');
+                    if (index != -1)
+                        column = column.Remove(index, 1);
+
+                    index = column.IndexOf(' ');
+                    if (index != -1)
+                        column = column.Remove(index);
+
+                    index = column.IndexOf(')');
+                    if (index != -1)
+                        column = column.Remove(index, 1);
+
+                    columns.Add(column);
+                }
+                CreateTable createTable = new CreateTable(tableName, columns);
+                return createTable;
+            }
+
+            else if (Regex.Match(miniSqlSentence, dropTablePattern).Success)
+            {
+                match = Regex.Match(miniSqlSentence, dropTablePattern);
+                DropTable dropTable = new DropTable(match.Groups[1].Value);
+                return dropTable; ;
+            }
+            else if (Regex.Match(miniSqlSentence, createSecurityProfilePattern).Success)
+            {
+                match = Regex.Match(miniSqlSentence, createSecurityProfilePattern);
+
+                CreateSecurityProfile createSecurityProfile = new CreateSecurityProfile(match.Groups[1].Value);
+                return createSecurityProfile;
+            }
+            else if (Regex.Match(miniSqlSentence, grantSelectPattern).Success)
+            {
+                match = Regex.Match(miniSqlSentence, grantSelectPattern);
+
+                GrantSelect grantSelect = new GrantSelect(match.Groups[1].Value, match.Groups[2].Value);
+                return grantSelect;
+            }
+            else if (Regex.Match(miniSqlSentence, addUserPattern).Success)
+            {
+                match = Regex.Match(miniSqlSentence, addUserPattern);
+
+                AddUser addUser = new AddUser(match.Groups[2].Value, match.Groups[3].Value, match.Groups[4].Value);
+                return addUser;
+            }
+            else
+                return null;
         }
     }
 }
