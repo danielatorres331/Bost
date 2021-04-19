@@ -18,7 +18,7 @@ namespace BostDB.MiniSqlParser
             return m_table;
         }
 
-        public  SelectAll(string table)
+        public SelectAll(string table)
         {
             m_table = table;
             
