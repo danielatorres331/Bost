@@ -28,7 +28,7 @@ namespace UnitTests
             columns.Add("Age");
             List<string> cols = (query as SelectColumns).GetColumnNames();
             Assert.AreEqual(cols.Count, columns.Count);
-            for(int i = 0; i < cols.Count; i++)
+            for (int i = 0; i < cols.Count; i++)
             {
                 Assert.AreEqual(cols[i], columns[i]);
             }
@@ -71,21 +71,22 @@ namespace UnitTests
         [TestMethod]
         public void TestDelete()
         {
-           IQuery query = Parser.Parse("DELETE FROM Table1 WHERE value=34567;");
-           Assert.IsTrue(query is Delete);
-           Assert.AreEqual("Table1", (query as Delete).Table());
-           Assert.AreEqual("value", (query as Delete).Column());
-           
+            IQuery query = Parser.Parse("DELETE FROM Table1 WHERE value=34567;");
+            Assert.IsTrue(query is Delete);
+            Assert.AreEqual("Table1", (query as Delete).Table());
+            Assert.AreEqual("value", (query as Delete).Column());
+
         }
 
         [TestMethod]
-        public void TestUpdate(){
+        public void TestUpdate()
+        {
             IQuery query = (Update)Parser.Parse("UPDATE Table1 SET column1=Alfred#Schmidt,column2=Frankfurt WHERE column2=5,column2=4;");
             IQuery query2 = (Update)Parser.Parse("UPDATE Table2 SET column1=Alfred#Schmidt WHERE column2=5;");
-            
+
             Assert.IsTrue(query is Update);
             Assert.IsTrue(query2 is Update);
-            
+
             Assert.AreEqual("Table1", (query as Update).GetTable());
             Assert.AreEqual("Table2", (query2 as Update).GetTable());
 
@@ -94,7 +95,7 @@ namespace UnitTests
             columns.Add("column2");
             List<string> columnsParse = (query as Update).GetColumns();
             Assert.AreEqual(columns.Count, columnsParse.Count);
-            for(int i = 0; i < columns.Count; i++)
+            for (int i = 0; i < columns.Count; i++)
                 Assert.AreEqual(columns[i], columnsParse[i]);
             columnsParse = (query2 as Update).GetColumns();
             Assert.AreEqual(1, columnsParse.Count);
@@ -183,9 +184,9 @@ namespace UnitTests
         public void TestCreateDataBase()
         {
             IQuery query = Parser.Parse("DataBase1,BostDB,password");
-            
+
             Assert.IsTrue(query is CreateDataBase);
-            
+
             Assert.AreEqual("DataBase1", (query as CreateDataBase).GetName());
             Assert.AreEqual("BostDB", (query as CreateDataBase).GetUser());
             Assert.AreEqual("password", (query as CreateDataBase).GetPassword());
@@ -202,14 +203,15 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void TestGrantSelect()
+        public void TestGrantPermission()
         {
             IQuery query = Parser.Parse("GRANT SELECT ON StudentPublic TO Student;");
 
-            Assert.IsTrue(query is GrantSelect);
+            Assert.IsTrue(query is GrantPermission);
 
-            Assert.AreEqual("StudentPublic", (query as GrantSelect).GetPermission());
-            Assert.AreEqual("Student",(query as GrantSelect).GetUser());
+            Assert.AreEqual("SELECT", (query as GrantPermission).GetPermission());
+            Assert.AreEqual("Student", (query as GrantPermission).GetUser());
+            Assert.AreEqual("StudentPublic", (query as GrantPermission).GetTable());
         }
 
         [TestMethod]
@@ -222,6 +224,17 @@ namespace UnitTests
             Assert.AreEqual("Carolina", (query as AddUser).GetUser());
             Assert.AreEqual("1711", (query as AddUser).GetPassword());
             Assert.AreEqual("Student", (query as AddUser).GetProfileName());
+        }
+        [TestMethod]
+        public void TestRevokePermission()
+        {
+            IQuery query = Parser.Parse("REVOKE UPDATE ON StudentPublic TO Student;");
+
+            Assert.IsTrue(query is RevokePermission);
+
+            Assert.AreEqual("UPDATE", (query as RevokePermission).GetPermission());
+            Assert.AreEqual("Student", (query as RevokePermission).GetUser());
+            Assert.AreEqual("StudentPublic", (query as RevokePermission).GetTable());
         }
 
         [TestMethod]

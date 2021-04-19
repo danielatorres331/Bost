@@ -8,13 +8,15 @@ using System.Threading.Tasks;
 
 namespace Bost.MiniSqlParser
 {
-    public class GrantSelect : IQuery
+    public class GrantPermission: IQuery
     {
         private string m_permission;
         private string m_user;
-        public GrantSelect(string permission, string user)
+        private string m_table;
+        public GrantPermission(string permission, string table, string user)
         {
             m_permission = permission;
+            m_table = table;
             m_user = user;
         }
         public string GetPermission()
@@ -24,6 +26,10 @@ namespace Bost.MiniSqlParser
         public string GetUser()
         {
             return m_user;
+        }
+        public string GetTable()
+        {
+            return m_table;
         }
         public string Run(DataBase database)
         {
