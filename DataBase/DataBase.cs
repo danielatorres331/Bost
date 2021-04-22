@@ -15,10 +15,8 @@ namespace BostDB
         String UserName;
         String Password;
         string pathString;
-
         List<User> Users = new List<User>(); // create the list empty
         private List<Profile> m_profiles; //Create an empty list of profiles
-
 
 
         //Constructor
@@ -28,7 +26,6 @@ namespace BostDB
             UserName = userName;
             Password = password;
             pathString = System.IO.Path.Combine(@"/Folder", name);
-            m_profiles = new List<Profile>();
         }
 
         //Delete a table
@@ -40,8 +37,8 @@ namespace BostDB
         //Adds a table to the DataBase
         public void AddTable(Table table)
         {
-            
-           Tables.Add(table);
+
+            Tables.Add(table);
         }
 
         //Search a table by name
@@ -93,14 +90,15 @@ namespace BostDB
 
         public void Save()
         {
-            foreach(Table tab in Tables)
+            foreach (Table tab in Tables)
             {
                 string folderName = System.IO.Path.Combine(pathString, tab.GetName());
                 CreateFolder(folderName);
                 tab.Save(folderName);
-            }         
-        }
+            }
 
+
+        }
         public string GetName()
         {
             return Name;
@@ -113,19 +111,15 @@ namespace BostDB
         public void CreateFolder(string folderName)
         {
             if (!System.IO.File.Exists(folderName))
-                {
-                    System.IO.File.Create(folderName);
-                }
+            {
+                System.IO.File.Create(folderName);
+            }
         }
-
-        
-
-        //Save Users
-        public void SaveUsers() {
-            
+        public void SaveUsers()
+        {
             string folderName = System.IO.Path.Combine(pathString);
             CreateFolder(folderName);
-          
+
             foreach (User us in Users)
             {
                 File.WriteAllText(pathString, us.Save());
@@ -180,6 +174,36 @@ namespace BostDB
         public void DeleteProfileByIndex(int index)
         {
             m_profiles.RemoveAt(index);
+        }
+
+        public int GetIndexUser(String user)
+        {
+            int i;
+
+            for (i = 0; i < Users.Count; i++)
+            {
+                if (Users[i].GetUser() == user)
+                {
+                    break;
+                }
+
+                else
+                {
+                    if (i == Users.Count - 1)
+                    {
+                        i = -1;
+                        break;
+                    }
+                }
+            }
+            return i;
+
+        }
+
+        public void DeleteUser(int index)
+        {
+            Users.RemoveAt(index);
+
         }
     }
 }
