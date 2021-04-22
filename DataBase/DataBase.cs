@@ -26,6 +26,7 @@ namespace BostDB
             UserName = userName;
             Password = password;
             pathString = System.IO.Path.Combine(@"/Folder", name);
+            m_profiles = new List<Profile>();
         }
 
         //Delete a table

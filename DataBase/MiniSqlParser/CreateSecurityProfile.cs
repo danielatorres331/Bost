@@ -21,8 +21,7 @@ namespace BostDB.MiniSqlParser
         }
         public string Run(DataBase database)
         {
-            Profile profile = new Profile(m_user);
-            database.AddProfile(profile);
+            database.AddProfile(new Profile(m_user));
             return Messages.SecurityProfileCreated;
         }
     }
