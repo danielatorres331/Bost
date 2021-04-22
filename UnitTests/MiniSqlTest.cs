@@ -181,18 +181,6 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void TestCreateDataBase()
-        {
-            IQuery query = Parser.Parse("DataBase1,BostDB,password");
-
-            Assert.IsTrue(query is CreateDataBase);
-
-            Assert.AreEqual("DataBase1", (query as CreateDataBase).GetName());
-            Assert.AreEqual("BostDB", (query as CreateDataBase).GetUser());
-            Assert.AreEqual("password", (query as CreateDataBase).GetPassword());
-        }
-
-        [TestMethod]
         public void TestCreateSecurityProfile()
         {
             IQuery query = Parser.Parse("CREATE SECURITY PROFILE Student;");
@@ -246,5 +234,19 @@ namespace UnitTests
 
             Assert.AreEqual("Student", (query as DropSecurityProfile).Profile());
         }
+
+
+        [TestMethod]
+        public void TestDeleteUser()
+        {
+            IQuery query = Parser.Parse("DELETE USER (Carolina);");
+
+            Assert.IsTrue(query is DeleteUser);
+
+            //Assert.AreEqual("Carolina", (query as DeleteUser).GetUser());
+
+
+        }
+
     }
 }

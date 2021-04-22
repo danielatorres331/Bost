@@ -158,7 +158,38 @@ namespace BostDB
                 }
             }
             return prof;
-        } 
+        }
+
+
+        public int GetIndexUser(String user)
+        {
+            int i;
+
+            for (i = 0; i < Users.Count; i++)
+            {
+                if (Users[i].GetUser() == user)
+                {
+                    break;
+                }
+
+                else
+                {
+                    if (i == Users.Count - 1)
+                    {
+                        i = -1;
+                        break;
+                    }
+                }
+            }
+            return i;
+
+        }
+
+        public void DeleteUser(int index)
+        {
+            Users.RemoveAt(index);
+
+        }
     }
 }
   
