@@ -236,5 +236,19 @@ namespace UnitTests
 
             Assert.AreEqual("Student", (query as DropSecurityProfile).Profile());
         }
+
+
+        [TestMethod]
+        public void TestDeleteUser()
+        {
+            IQuery query = Parser.Parse("DELETE USER (Carolina);");
+
+            Assert.IsTrue(query is DeleteUser);
+
+            //Assert.AreEqual("Carolina", (query as DeleteUser).GetUser());
+
+
+        }
+
     }
 }

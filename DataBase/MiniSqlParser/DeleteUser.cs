@@ -39,9 +39,23 @@ namespace Bost.MiniSqlParser
 
             }
 
+ 
         public string Run(DataBase database)
         {
-            throw new NotImplementedException();
+
+            int index = database.GetIndexUser(m_user);
+
+            if (index == -1)
+            {
+                return Messages.SecurityUserDoesNotExist;
+            }
+            else
+            {
+
+                database.DeleteUser(index);
+                return Messages.SecurityUserDeleted;
+
+            }
         }
     }
 }
