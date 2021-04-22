@@ -34,6 +34,28 @@ namespace UnitTests
 
         }
 
+        [TestMethod]
+        public void TestAddUser()
+        {
+            DataBase db = new DataBase("DataBase3", "Bost", "contraseña");
+            Profile p = new Profile("Student");
+            User usu = new User("Manolo", "password", p);
+            db.AddUser(usu);
+            Assert.IsNotNull(db.SearchUserByName("Manolo"));
+            //Assert.AreEqual(usu, db.SearchUserByName("Manolo"));
+           
+        }
+
+        [TestMethod]
+        public void TestSearchUserByName()
+        {
+            DataBase db = new DataBase("DataBase3", "Bost", "contraseña");
+            Profile p = new Profile("Student");
+            User usu = new User("Manolo", "password", p);
+            db.AddUser(usu);
+            Assert.AreEqual(usu, db.SearchUserByName("Manolo"));
+        }
+
         
         [TestMethod]
         public void TestSeachTableByName()

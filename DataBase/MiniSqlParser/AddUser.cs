@@ -31,9 +31,13 @@ namespace Bost.MiniSqlParser
         {
             return m_profileName;
         }
+       
         public string Run(DataBase database)
         {
-            throw new NotImplementedException();
+            database.AddUser(new User(m_user, m_password, database.GetProfile(m_profileName)));
+
+            return Messages.SecurityUserAdded;
+
         }
     }
 }
