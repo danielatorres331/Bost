@@ -38,6 +38,11 @@ namespace Bost.MiniSqlParser
             
 
             }
+
+        public string Run(DataBase database)
+        {
+            throw new NotImplementedException();
         }
     }
 }
+

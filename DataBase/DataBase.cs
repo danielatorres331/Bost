@@ -17,6 +17,7 @@ namespace BostDB
         string pathString;
 
         List<User> Users = new List<User>(); // create the list empty
+        private List<Profile> m_profiles; //Create an empty list of profiles
 
 
 
@@ -27,6 +28,7 @@ namespace BostDB
             UserName = userName;
             Password = password;
             pathString = System.IO.Path.Combine(@"/Folder", name);
+            m_profiles = new List<Profile>();
         }
 
         //Delete a table
@@ -130,7 +132,25 @@ namespace BostDB
             }
         }
 
+        public List<Profile> GetProfiles()
+        {
+            return m_profiles;
+        }
 
-}
+        public Profile GetProfile(string name)
+        {
+            Profile prof = null;
+            foreach (Profile profile in m_profiles)
+            {
+                if (profile.GetName() == name)
+                {
+                    prof = profile;
+                    break;
+                }
+            }
+            return prof;
+        }
+
+    }
 }
   
