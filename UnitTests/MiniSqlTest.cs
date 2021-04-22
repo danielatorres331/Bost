@@ -4,7 +4,6 @@ using BostDB;
 using BostDB.MiniSqlParser;
 using System.Collections.Generic;
 using BostDB.MiniSqlParser;
-using Bost;
 
 namespace UnitTests
 {

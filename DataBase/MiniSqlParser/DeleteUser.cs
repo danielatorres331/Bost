@@ -7,7 +7,7 @@ using BostDB;
 using BostDB.MiniSqlParser;
 
 
-namespace Bost.MiniSqlParser
+namespace BostDB.MiniSqlParser
 {
     public class DeleteUser: IQuery
 
