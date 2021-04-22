@@ -3,7 +3,8 @@ using System;
 using BostDB;
 using BostDB.MiniSqlParser;
 using System.Collections.Generic;
-using Bost.MiniSqlParser;
+using BostDB.MiniSqlParser;
+using Bost;
 
 namespace UnitTests
 {
@@ -180,18 +181,7 @@ namespace UnitTests
             Assert.AreEqual("tableName", (query as DropTable).Table());
         }
 
-        [TestMethod]
-        public void TestCreateDataBase()
-        {
-            IQuery query = Parser.Parse("DataBase1,BostDB,password");
-
-            Assert.IsTrue(query is CreateDataBase);
-
-            Assert.AreEqual("DataBase1", (query as CreateDataBase).GetName());
-            Assert.AreEqual("BostDB", (query as CreateDataBase).GetUser());
-            Assert.AreEqual("password", (query as CreateDataBase).GetPassword());
-        }
-
+       
         [TestMethod]
         public void TestCreateSecurityProfile()
         {

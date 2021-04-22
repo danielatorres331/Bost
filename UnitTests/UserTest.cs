@@ -22,7 +22,7 @@ namespace UnitTests
         public void TestGetUser()
         {
             Assert.AreEqual("u1", _user.GetUser());
-            Assert.AreEqual("u2", _user.GetUser());
+            Assert.AreEqual("u2", _user2.GetUser());
         }
 
         [TestMethod]

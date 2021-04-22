@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bost.MiniSqlParser
+namespace BostDB.MiniSqlParser
 {
     public class CreateSecurityProfile : IQuery
     {

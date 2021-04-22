@@ -6,13 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bost.MiniSqlParser
+namespace BostDB.MiniSqlParser
 {
-    public class GrantPermission: IQuery
+    public class GrantPermission : IQuery
     {
         private string m_permission;
         private string m_user;
         private string m_table;
+
         public GrantPermission(string permission, string table, string user)
         {
             m_permission = permission;
@@ -32,8 +33,20 @@ namespace Bost.MiniSqlParser
             return m_table;
         }
         public string Run(DataBase database)
-        {
-            throw new NotImplementedException();
+        {//GRANT privilege_type ON table TO security_profile;
+
+            Privilege privilege = new Privilege(m_permission, m_table);
+            Profile profile = database.GetProfile(m_user);
+            if (profile != null)
+            {
+                profile.AddPrivilege(privilege);
+                return Messages.SecurityPrivilegeGranted;
+            }
+            else
+            {
+                return Messages.SecurityProfileDoesNotExist;
+            }
+
         }
     }
 }

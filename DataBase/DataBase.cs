@@ -55,22 +55,7 @@ namespace BostDB
             }
             return tab;
         }
-        //public Table SelectAll(string name) 
-        //{
-        // return null;
-        //}
-        // public Table SelectColumns(string table, List<int> columNames)
-        // {
-        // foreach (Table tab in Tables)
-        //{
-        //if (tab.GetName() == table && tab.GetColumn().Equals(columNames))
-        //{
-        //  }
-        //}
-        //  return null;
-        //}
-
-        // Load database : path, file
+        
         public void Load(string nameDB)
         {
             string dbName = System.IO.Path.Combine(@"/Folder", nameDB);
