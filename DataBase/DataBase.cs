@@ -151,6 +151,36 @@ namespace BostDB
             return prof;
         }
 
+        public void AddProfile(Profile profile)
+        {
+            m_profiles.Add(profile);
+        }
+
+        public int GetIndexProfile(string name)
+        {
+            int i;
+            for(i = 0; i < m_profiles.Count; i++)
+            {
+                if(m_profiles[i].GetName() == name)
+                {
+                    break;
+                }
+                else
+                {
+                    if(i == m_profiles.Count - 1) //if the last profile is not the profile we are searching returns -1
+                    {
+                        i = -1;
+                        break;
+                    }
+                }
+            }
+            return i;
+        }
+
+        public void DeleteProfileByIndex(int index)
+        {
+            m_profiles.RemoveAt(index);
+        }
     }
 }
   

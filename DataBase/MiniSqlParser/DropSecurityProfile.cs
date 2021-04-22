@@ -24,7 +24,17 @@ namespace Bost.MiniSqlParser
 
         public string Run(DataBase database)
         {
-            throw new NotImplementedException();
+            int index = database.GetIndexProfile(m_profile);
+
+            if(index != -1)
+            {
+                database.DeleteProfileByIndex(index);
+                return Messages.SecurityProfileDeleted;
+            }
+            else
+            {
+                return Messages.SecurityProfileDoesNotExist;
+            }
         }
     }
 }
