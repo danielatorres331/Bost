@@ -15,10 +15,8 @@ namespace BostDB
         String UserName;
         String Password;
         string pathString;
-
         List<User> Users = new List<User>(); // create the list empty
         private List<Profile> m_profiles; //Create an empty list of profiles
-
 
 
         //Constructor
@@ -28,7 +26,6 @@ namespace BostDB
             UserName = userName;
             Password = password;
             pathString = System.IO.Path.Combine(@"/Folder", name);
-            m_profiles = new List<Profile>();
         }
 
         //Delete a table
@@ -40,8 +37,8 @@ namespace BostDB
         //Adds a table to the DataBase
         public void AddTable(Table table)
         {
-            
-           Tables.Add(table);
+
+            Tables.Add(table);
         }
 
         //Search a table by name
@@ -58,7 +55,22 @@ namespace BostDB
             }
             return tab;
         }
-        
+        //public Table SelectAll(string name) 
+        //{
+        // return null;
+        //}
+        // public Table SelectColumns(string table, List<int> columNames)
+        // {
+        // foreach (Table tab in Tables)
+        //{
+        //if (tab.GetName() == table && tab.GetColumn().Equals(columNames))
+        //{
+        //  }
+        //}
+        //  return null;
+        //}
+
+        // Load database : path, file
         public void Load(string nameDB)
         {
             string dbName = System.IO.Path.Combine(@"/Folder", nameDB);
@@ -93,14 +105,15 @@ namespace BostDB
 
         public void Save()
         {
-            foreach(Table tab in Tables)
+            foreach (Table tab in Tables)
             {
                 string folderName = System.IO.Path.Combine(pathString, tab.GetName());
                 CreateFolder(folderName);
                 tab.Save(folderName);
-            }         
-        }
+            }
 
+
+        }
         public string GetName()
         {
             return Name;
@@ -113,19 +126,15 @@ namespace BostDB
         public void CreateFolder(string folderName)
         {
             if (!System.IO.File.Exists(folderName))
-                {
-                    System.IO.File.Create(folderName);
-                }
+            {
+                System.IO.File.Create(folderName);
+            }
         }
-
-        
-
-        //Save Users
-        public void SaveUsers() {
-            
+        public void SaveUsers()
+        {
             string folderName = System.IO.Path.Combine(pathString);
             CreateFolder(folderName);
-          
+
             foreach (User us in Users)
             {
                 File.WriteAllText(pathString, us.Save());
@@ -149,8 +158,7 @@ namespace BostDB
                 }
             }
             return prof;
-        }
-
+        } 
     }
 }
   

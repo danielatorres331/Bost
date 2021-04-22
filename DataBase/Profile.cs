@@ -21,12 +21,10 @@ namespace BostDB
         {
             return m_name;
         }
-
         public List<Privilege> GetPrivileges()
         {
             return m_privileges;
         }
-
         public Privilege GetPrivilege(string privilegeName, string table)
         {
             Privilege priv = null; 
@@ -38,10 +36,8 @@ namespace BostDB
                     break;
                 }
             }
-
             return priv;
         }
-
         public void AddPrivilege (Privilege privilege)
         {
             m_privileges.Add(privilege);
