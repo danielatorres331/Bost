@@ -19,7 +19,10 @@ namespace BostDB.MiniSqlParser
             m_user = user;
         }
 
-
+        public String GetUser()
+        {
+            return m_user;
+        }
 
         public string Run(User user)
         {

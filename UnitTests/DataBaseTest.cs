@@ -42,7 +42,7 @@ namespace UnitTests
             User usu = new User("Manolo", "password", p);
             db.AddUser(usu);
             Assert.IsNotNull(db.SearchUserByName("Manolo"));
-            //Assert.AreEqual(usu, db.SearchUserByName("Manolo"));
+            Assert.AreEqual(usu, db.SearchUserByName("Manolo"));
            
         }
 
