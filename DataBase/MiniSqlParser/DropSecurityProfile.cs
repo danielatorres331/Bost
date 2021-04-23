@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bost.MiniSqlParser
+namespace BostDB.MiniSqlParser
 {
     public class DropSecurityProfile : IQuery
     {
@@ -24,7 +24,17 @@ namespace Bost.MiniSqlParser
 
         public string Run(DataBase database)
         {
-            throw new NotImplementedException();
+            int index = database.GetIndexProfile(m_profile);
+
+            if(index != -1)
+            {
+                database.DeleteProfileByIndex(index);
+                return Messages.SecurityProfileDeleted;
+            }
+            else
+            {
+                return Messages.SecurityProfileDoesNotExist;
+            }
         }
     }
 }

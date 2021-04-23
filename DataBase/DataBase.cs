@@ -15,10 +15,8 @@ namespace BostDB
         String UserName;
         String Password;
         string pathString;
-
         List<User> Users = new List<User>(); // create the list empty
         private List<Profile> m_profiles; //Create an empty list of profiles
-
 
 
         //Constructor
@@ -40,8 +38,8 @@ namespace BostDB
         //Adds a table to the DataBase
         public void AddTable(Table table)
         {
-            
-           Tables.Add(table);
+
+            Tables.Add(table);
         }
 
         //Adds users to the List
@@ -112,14 +110,15 @@ namespace BostDB
 
         public void Save()
         {
-            foreach(Table tab in Tables)
+            foreach (Table tab in Tables)
             {
                 string folderName = System.IO.Path.Combine(pathString, tab.GetName());
                 CreateFolder(folderName);
                 tab.Save(folderName);
-            }         
-        }
+            }
 
+
+        }
         public string GetName()
         {
             return Name;
@@ -132,19 +131,15 @@ namespace BostDB
         public void CreateFolder(string folderName)
         {
             if (!System.IO.File.Exists(folderName))
-                {
-                    System.IO.File.Create(folderName);
-                }
+            {
+                System.IO.File.Create(folderName);
+            }
         }
-
-        
-
-        //Save Users
-        public void SaveUsers() {
-            
+        public void SaveUsers()
+        {
             string folderName = System.IO.Path.Combine(pathString);
             CreateFolder(folderName);
-          
+
             foreach (User us in Users)
             {
                 File.WriteAllText(pathString, us.Save());
@@ -170,6 +165,66 @@ namespace BostDB
             return prof;
         }
 
+        public void AddProfile(Profile profile)
+        {
+            m_profiles.Add(profile);
+        }
+
+        public int GetIndexProfile(string name)
+        {
+            int i;
+            for(i = 0; i < m_profiles.Count; i++)
+            {
+                if(m_profiles[i].GetName() == name)
+                {
+                    break;
+                }
+                else
+                {
+                    if(i == m_profiles.Count - 1) //if the last profile is not the profile we are searching returns -1
+                    {
+                        i = -1;
+                        break;
+                    }
+                }
+            }
+            return i;
+        }
+
+        public void DeleteProfileByIndex(int index)
+        {
+            m_profiles.RemoveAt(index);
+        }
+
+        public int GetIndexUser(String user)
+        {
+            int i;
+
+            for (i = 0; i < Users.Count; i++)
+            {
+                if (Users[i].GetUser() == user)
+                {
+                    break;
+                }
+
+                else
+                {
+                    if (i == Users.Count - 1)
+                    {
+                        i = -1;
+                        break;
+                    }
+                }
+            }
+            return i;
+
+        }
+
+        public void DeleteUser(int index)
+        {
+            Users.RemoveAt(index);
+
+        }
     }
 }
   
