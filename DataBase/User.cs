@@ -24,6 +24,16 @@ namespace BostDB
             return _user;
         }
 
+        public string GetPassword()
+        {
+            return _password;
+        }
+
+        public Profile GetProfile()
+        {
+            return _profile;
+        }
+
         public String Save()
         {
             return _user +"," + _password +"," +_profile;

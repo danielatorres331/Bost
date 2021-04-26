@@ -34,9 +34,14 @@ namespace BostDB.MiniSqlParser
        
         public string Run(DataBase database)
         {
-            database.AddUser(new User(m_user, m_password, database.GetProfile(m_profileName)));
+            if (database.CanDo("", ""))
+            {
+                database.AddUser(new User(m_user, m_password, database.GetProfile(m_profileName)));
 
-            return Messages.SecurityUserAdded;
+                return Messages.SecurityUserAdded;
+            }
+            else
+                return Messages.SecurityNotSufficientPrivileges;
 
         }
     }

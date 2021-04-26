@@ -19,22 +19,31 @@ namespace BostDB.MiniSqlParser
             m_user = user;
         }
 
+        public string GetUser()
+        {
+            return m_user;
+        }
+
         public string Run(DataBase database)
         {
-
-            int index = database.GetIndexUser(m_user);
-
-            if (index == -1)
+            if (database.CanDo("", ""))
             {
-                return Messages.SecurityUserDoesNotExist;
+                int index = database.GetIndexUser(m_user);
+
+                if (index == -1)
+                {
+                    return Messages.SecurityUserDoesNotExist;
+                }
+                else
+                {
+
+                    database.DeleteUser(index);
+                    return Messages.SecurityUserDeleted;
+
+                }
             }
             else
-            {
-
-                database.DeleteUser(index);
-                return Messages.SecurityUserDeleted;
-
-            }
+                return Messages.SecurityNotSufficientPrivileges;
         }
     }
 }

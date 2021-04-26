@@ -76,7 +76,6 @@ namespace Console
 
                         for(int j = 0; j < users.Count; j++)
                         {
-
                             if(users[j].GetUser() == databaseString[1] && users[j].GetPassword() == databaseString[2])
                             {
                                 dataBase.SetUser(users[j]);
@@ -104,10 +103,6 @@ namespace Console
             }
             System.Console.WriteLine("TOTAL TIME: " + time.ToString("0.0000 ms"));
             stopwatch.Stop();
-      
-        
-            
-        
         }
     }
 }

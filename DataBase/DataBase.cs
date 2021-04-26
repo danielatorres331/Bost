@@ -27,6 +27,8 @@ namespace BostDB
             Password = password;
             pathString = System.IO.Path.Combine(@"/Folder", name);
             m_profiles = new List<Profile>();
+            m_user = new User("admin", "admin", new Profile("admin"));
+            Users.Add(new User(userName, password, null));
         }
 
         //Delete a table
@@ -250,14 +252,9 @@ namespace BostDB
             }
             else
             {
-                List<Privilege> privileges = m_user.GetProfile().GetPrivileges();
-                foreach (Privilege priv in privileges)
-                {
-                    if (priv.GetPrivilege() == privilege && priv.GetTable() == table)
-                    {
+                Privilege privileges = m_user.GetProfile().GetPrivileges().Find(priv=>priv.GetPrivilege() == privilege && priv.GetTable() == table);
+                if (privilege != null) {
                         can = true;
-                        break;
-                    }
                 }
             }
             return can;

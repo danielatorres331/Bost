@@ -33,20 +33,23 @@ namespace BostDB.MiniSqlParser
             return m_table;
         }
         public string Run(DataBase database)
-        {//GRANT privilege_type ON table TO security_profile;
-
-            Privilege privilege = new Privilege(m_permission, m_table);
-            Profile profile = database.GetProfile(m_user);
-            if (profile != null)
+        {
+            if (database.CanDo("", ""))
             {
-                profile.AddPrivilege(privilege);
-                return Messages.SecurityPrivilegeGranted;
+                Privilege privilege = new Privilege(m_permission, m_table);
+                Profile profile = database.GetProfile(m_user);
+                if (profile != null)
+                {
+                    profile.AddPrivilege(privilege);
+                    return Messages.SecurityPrivilegeGranted;
+                }
+                else
+                {
+                    return Messages.SecurityProfileDoesNotExist;
+                }
             }
             else
-            {
-                return Messages.SecurityProfileDoesNotExist;
-            }
-
+                return Messages.SecurityNotSufficientPrivileges;
         }
     }
 }
