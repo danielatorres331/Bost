@@ -203,25 +203,25 @@ namespace BostDB
         {
             string toString = "[";
 
-            for(int i = 0; i < Columns.Count; i++)
+            for (int i = 0; i < Columns.Count; i++)
             {
                 if (i < Columns.Count - 1)
-                    toString += Columns[i].GetName() + ", ";
+                    toString += "'" + Columns[i].GetName() + "',";
                 else
-                    toString += Columns[i].GetName() + "]";
+                    toString += "'" + Columns[i].GetName() + "']";
             }
 
             int values = Columns[0].GetValues().Count;
 
-            for(int i = 0; i < values; i++)
+            for (int i = 0; i < values; i++)
             {
-                for(int j = 0; j < Columns.Count; j++)
+                for (int j = 0; j < Columns.Count; j++)
                 {
-                    if(j == 0)
+                    if (j == 0)
                         toString += "{";
 
                     if (j != Columns.Count - 1)
-                        toString += Columns[j].GetValue(i) + ", ";
+                        toString += Columns[j].GetValue(i) + ",";
                     else
                         toString += Columns[j].GetValue(i) + "}";
                 }
