@@ -30,19 +30,22 @@ namespace BostDB.MiniSqlParser
 
         public string Run(DataBase database)
         {
-            Table t = database.SearchTableByName(m_table);
-
-            if (t == null)
+            if (database.CanDo("INSERT", m_table))
             {
-                return Messages.TableDoesNotExist;
+                Table t = database.SearchTableByName(m_table);
+
+                if (t == null)
+                {
+                    return Messages.TableDoesNotExist;
+                }
+                else
+                {
+                    t.AddRow(m_values);
+                    return Messages.InsertSuccess;
+                }
             }
             else
-            {
-                t.AddRow(m_values);
-                return Messages.InsertSuccess;
-            }
-                  
-            
+                return Messages.SecurityNotSufficientPrivileges;
         }
     }
 }

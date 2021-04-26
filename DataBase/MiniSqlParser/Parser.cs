@@ -19,12 +19,12 @@ namespace BostDB.MiniSqlParser
             const string updatePattern = @"UPDATE ([a-zA-Z0-9]+) SET ([^\s]+) WHERE ([^\s]+);";
             const string dropTablePattern = @"DROP TABLE ([a-zA-Z0-9]+);";
             const string createTablePattern = @"CREATE TABLE (([a-zA-Z0-9]+)) (\((([^\s]+) (TEXT|INT|DOUBLE),?)+\));";
-            const string createDataBasePattern = @"([a-zA-Z0-9]+),([a-zA-Z0-9]+),([a-zA-Z0-9]+)";
             const string createSecurityProfilePattern = @"CREATE SECURITY PROFILE ([a-zA-Z0-9]+);";
             const string grantPattern = @"GRANT (SELECT|UPDATE|DELETE|INSERT) ON ([a-zA-Z0-9]+) TO ([a-zA-Z0-9]+);";
             const string addUserPattern = @"ADD USER \((([a-zA-Z0-9']+),([a-zA-Z0-9']+),([a-zA-Z0-9']+))\);";
             const string dropSecurityProfilePattern = @"DROP SECURITY PROFILE ([a-zA-Z0-9']+);";
             const string revokePattern = "REVOKE (SELECT|UPDATE|DELETE|INSERT) ON ([a-zA-Z0-9]+) TO ([a-zA-Z0-9]+);";
+            const string deleteUserPattern = "DELETE USER ([a-zA-Z0-9]+);";
 
             Match match;
 
@@ -170,6 +170,12 @@ namespace BostDB.MiniSqlParser
 
                 RevokePermission revokePermission = new RevokePermission(match.Groups[1].Value, match.Groups[2].Value, match.Groups[3].Value);
                 return revokePermission;
+            }
+            else if (Regex.Match(miniSqlSentence, deleteUserPattern).Success)
+            {
+                match = Regex.Match(miniSqlSentence, deleteUserPattern);
+                DeleteUser deleteUser = new DeleteUser(match.Groups[1].Value);
+                return deleteUser;
             }
             else
                 return null;

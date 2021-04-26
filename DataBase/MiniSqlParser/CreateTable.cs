@@ -21,15 +21,20 @@ namespace BostDB.MiniSqlParser
 
         public string Run(DataBase database)
         {
-            database.AddTable(new Table(m_table));
-            Table table = database.SearchTableByName(m_table);
-
-            foreach (String column in m_newColumns)
+            if (database.CanDo("", ""))
             {
-                table.AddColumn(new Column(column));
-            }
+                database.AddTable(new Table(m_table));
+                Table table = database.SearchTableByName(m_table);
 
-            return Messages.CreateTableSuccess;
+                foreach (String column in m_newColumns)
+                {
+                    table.AddColumn(new Column(column));
+                }
+
+                return Messages.CreateTableSuccess;
+            }
+            else
+                return Messages.SecurityNotSufficientPrivileges;
         }
 
         public string GetTable()
