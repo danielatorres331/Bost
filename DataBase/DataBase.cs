@@ -42,6 +42,25 @@ namespace BostDB
             Tables.Add(table);
         }
 
+        //Adds users to the List
+        public void AddUser(User user)
+        {
+            Users.Add(user);
+        }
+
+        public User SearchUserByName(string userName)
+        {
+            User usu = null;
+            foreach(User u in Users)
+            {
+                if(u.GetUser() == userName)
+                {
+                    usu = u;
+                }
+            }
+            return usu;
+        }
+
         //Search a table by name
         public Table SearchTableByName(String name)
         {

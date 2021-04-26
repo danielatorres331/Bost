@@ -104,6 +104,10 @@ namespace Console
             }
             System.Console.WriteLine("TOTAL TIME: " + time.ToString("0.0000 ms"));
             stopwatch.Stop();
+      
+        
+            
+        
         }
     }
 }
