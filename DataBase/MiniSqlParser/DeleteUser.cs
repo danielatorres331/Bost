@@ -23,25 +23,6 @@ namespace BostDB.MiniSqlParser
         {
             return m_user;
         }
-
-        public string Run(User user)
-        {
-            /*User u = user.GetUser();
-
-            if (u == null)
-            {
-                return Messages.SecurityUserDoesNotExist;
-            }
-            else
-            {
-                u.GetIndex();
-                users.RemoveAt();
-            */
-                return Messages.SecurityUserDeleted;
-            
-
-            }
-
  
         public string Run(DataBase database)
         {
