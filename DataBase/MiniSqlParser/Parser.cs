@@ -1,5 +1,4 @@
-﻿using Bost.MiniSqlParser;
-using BostDB.MiniSqlParser;
+﻿using BostDB.MiniSqlParser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -158,7 +157,6 @@ namespace BostDB.MiniSqlParser
                 AddUser addUser = new AddUser(match.Groups[2].Value, match.Groups[3].Value, match.Groups[4].Value);
                 return addUser;
             }
- 
             else if (Regex.Match(miniSqlSentence, dropSecurityProfilePattern).Success)
             {
                 match = Regex.Match(miniSqlSentence, dropSecurityProfilePattern);

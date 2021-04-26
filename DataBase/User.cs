@@ -14,9 +14,9 @@ namespace BostDB
 
         public User(string us, string pass, Profile prof)
         {
-            us = _user;
-            pass = _password;
-            prof = _profile;
+             _user=us;
+             _password=pass;
+             _profile= prof;
         }
 
         public string GetUser()

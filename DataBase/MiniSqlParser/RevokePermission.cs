@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bost.MiniSqlParser
+namespace BostDB.MiniSqlParser
 {
     public class RevokePermission : IQuery
     {
@@ -34,7 +34,19 @@ namespace Bost.MiniSqlParser
         }
         public string Run(DataBase database)
         {
-            throw new NotImplementedException();
+            Profile profile = database.GetProfile(m_user);
+            
+            int index = profile.GetIndexPrivilege(m_permission, m_table);
+
+            if (index != -1)
+            {
+                profile.DeletePrivilegeByIndex(index);
+                return Messages.SecurityPrivilegeRevoked;
+            }
+            else
+            {
+                return Messages.SecurityProfileDoesNotExist;
+            }
         }
     }
 }

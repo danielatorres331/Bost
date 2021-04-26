@@ -44,10 +44,6 @@ namespace BostDB
         public const string SecurityUserAlreadyExists = Error + "Security user already exists";
         public const string SecurityProfileDoesNotExist = Error + "Security profile does not exist";
         public const string SecurityUserDoesNotExist = Error + "Security user does not exist";
-
-        
-
-
-        
+        public const string PermissionDoesNotExist = Error + "The user has not this permission";
     }
 }

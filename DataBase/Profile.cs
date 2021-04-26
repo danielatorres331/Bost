@@ -42,5 +42,31 @@ namespace BostDB
         {
             m_privileges.Add(privilege);
         }
+
+        public int GetIndexPrivilege(string privilege, string table)
+        {
+            int i;
+            for (i = 0; i < m_privileges.Count; i++)
+            {
+                if (m_privileges[i].GetPrivilege() == privilege && m_privileges[i].GetTable() == table)
+                {
+                    break;
+                }
+                else
+                {
+                    if (i == m_privileges.Count - 1) //if the last profile is not the profile we are searching returns -1
+                    {
+                        i = -1;
+                        break;
+                    }
+                }
+            }
+            return i;
+        }
+
+        public void DeletePrivilegeByIndex(int index)
+        {
+            m_privileges.RemoveAt(index);
+        }
     }
 }
