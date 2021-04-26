@@ -237,6 +237,7 @@ namespace UnitTests
 
 
         [TestMethod]
+    
         public void TestDeleteUser()
         {
             IQuery query = Parser.Parse("DELETE USER Carolina;");
