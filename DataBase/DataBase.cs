@@ -253,7 +253,7 @@ namespace BostDB
             else
             {
                 Privilege privileges = m_user.GetProfile().GetPrivileges().Find(priv=>priv.GetPrivilege() == privilege && priv.GetTable() == table);
-                if (privilege != null) {
+                if (privileges != null) {
                         can = true;
                 }
             }

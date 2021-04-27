@@ -23,11 +23,6 @@ namespace BostDB.MiniSqlParser
             return m_user;
         }
 
-        public string GetUser()
-        {
-            return m_user;
-        }
-
         public string Run(DataBase database)
         {
             if (database.CanDo("", ""))

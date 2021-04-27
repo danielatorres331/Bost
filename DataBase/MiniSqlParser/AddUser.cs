@@ -15,9 +15,9 @@ namespace BostDB.MiniSqlParser
         private string m_profileName;
         public AddUser(string user, string password, string profileName)
         {
-            m_user = user;
-            m_password = password;
-            m_profileName = profileName;
+            m_user = user.Replace("'", "");
+            m_password = password.Replace("'", "");
+            m_profileName = profileName.Replace("'", "");
         }
         public string GetUser()
         {

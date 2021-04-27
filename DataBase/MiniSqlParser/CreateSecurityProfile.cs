@@ -10,20 +10,20 @@ namespace BostDB.MiniSqlParser
 {
     public class CreateSecurityProfile : IQuery
     {
-        private string m_user;
-        public CreateSecurityProfile(string user)
+        private string m_profile;
+        public CreateSecurityProfile(string profile)
         {
-            m_user = user;
+            m_profile = profile;
         }
-        public string GetUser()
+        public string GetProfile()
         {
-            return m_user;
+            return m_profile;
         }
         public string Run(DataBase database)
         {
             if (database.CanDo("", ""))
             {
-                database.AddProfile(new Profile(m_user));
+                database.AddProfile(new Profile(m_profile));
                 return Messages.SecurityProfileCreated;
             }
             else
