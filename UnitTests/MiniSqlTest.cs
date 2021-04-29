@@ -3,7 +3,7 @@ using System;
 using BostDB;
 using BostDB.MiniSqlParser;
 using System.Collections.Generic;
-using BostDB.MiniSqlParser;
+
 
 namespace UnitTests
 {

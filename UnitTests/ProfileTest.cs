@@ -13,11 +13,14 @@ namespace UnitTests
     {
         private Profile m_profile;
         private Profile m_profile2;
+        private Profile m_profile3;
 
         public ProfileTest()
         {
             m_profile = new Profile("user");
             m_profile2 = new Profile("admin");
+            
+            
         }
 
         [TestMethod]
@@ -25,6 +28,7 @@ namespace UnitTests
         {
             Assert.IsNotNull(m_profile);
             Assert.IsNotNull(m_profile2);
+            Assert.IsNull(m_profile3);
         }
 
         [TestMethod]
@@ -119,5 +123,76 @@ namespace UnitTests
                 Assert.AreEqual(privilege.GetTable(), privilege2.GetTable());
             }
         }
-    }
-}
+        [TestMethod]
+        public void TestAddPrivilege()
+        {
+            
+            Privilege privilege = new Privilege("CREATE", "student");
+            m_profile2.AddPrivilege(privilege);
+
+            Assert.IsNotNull(m_profile2.GetPrivileges());
+            Assert.AreEqual(m_profile2.GetPrivileges().Count, 1);
+
+            Privilege privilege2 = new Privilege("DROP", "location");
+            Privilege privilege3 = new Privilege("ALTER", "student");
+            Privilege privilege4 = new Privilege("CREATE", "project");
+
+            m_profile.AddPrivilege(privilege2);
+            m_profile.AddPrivilege(privilege3);
+            m_profile.AddPrivilege(privilege4);
+
+            Assert.AreEqual(m_profile.GetPrivilege("DROP","location"),privilege2);
+            Assert.IsNotNull(m_profile.GetPrivileges());
+            Assert.IsNull(m_profile.GetPrivilege("CREATE", "student"));
+            Assert.AreEqual(m_profile.GetPrivileges().Count, 3);
+            Assert.IsNull(m_profile3);
+        }
+        [TestMethod]
+        public void TestGetIndexPrivilege()
+        {
+            Privilege privilege = new Privilege("DROP", "student");
+            Privilege privilege2 = new Privilege("ALTER", "location");
+            Privilege privilege3 = new Privilege("CREATE", "teachers");
+
+            m_profile.AddPrivilege(privilege2);
+            m_profile.AddPrivilege(privilege3);
+            m_profile.AddPrivilege(privilege);
+
+            Assert.AreEqual(m_profile.GetIndexPrivilege("DROP", "student"),2);
+            Assert.AreEqual(m_profile.GetIndexPrivilege("ALTER", "location"), 0);
+            Assert.AreEqual(m_profile.GetIndexPrivilege("CREATE", "teachers"), 1);
+        }
+        [TestMethod]
+        public void TestDeletePrivilegeByIndex()
+        {
+            Privilege privilege = new Privilege("DROP", "student");
+            Privilege privilege2 = new Privilege("ALTER", "location");
+            Privilege privilege3 = new Privilege("CREATE", "teachers");
+            Privilege privilege4 = new Privilege("CREATE", "employee");
+            Privilege privilege5 = new Privilege("DROP", "project");
+
+            m_profile.AddPrivilege(privilege);
+            m_profile.AddPrivilege(privilege2);
+            m_profile.AddPrivilege(privilege3);         
+            m_profile.AddPrivilege(privilege4);
+            m_profile.AddPrivilege(privilege5);
+
+            int index0 = m_profile.GetIndexPrivilege("ALTER", "location");
+
+            Assert.AreEqual(index0, 1);
+
+            m_profile.DeletePrivilegeByIndex(0);
+            m_profile.DeletePrivilegeByIndex(1);
+
+            int index = m_profile.GetIndexPrivilege("ALTER", "location");
+            int index2 = m_profile.GetIndexPrivilege("CREATE", "employee");
+         
+            Assert.IsNotNull(m_profile.GetPrivilege("ALTER", "location"));
+            Assert.AreEqual(index, 0);
+            Assert.AreEqual(index2, 1);
+
+
+        }
+    }        
+ }
+
