@@ -187,7 +187,7 @@ namespace UnitTests
 
             Assert.IsTrue(query is CreateSecurityProfile);
 
-            Assert.AreEqual("Student", (query as CreateSecurityProfile).GetUser());
+            Assert.AreEqual("Student", (query as CreateSecurityProfile).GetProfile());
         }
 
         [TestMethod]
@@ -237,6 +237,7 @@ namespace UnitTests
 
 
         [TestMethod]
+    
         public void TestDeleteUser()
         {
             IQuery query = Parser.Parse("DELETE USER Carolina;");

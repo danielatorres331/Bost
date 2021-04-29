@@ -34,19 +34,24 @@ namespace BostDB.MiniSqlParser
         }
         public string Run(DataBase database)
         {
-            Profile profile = database.GetProfile(m_user);
-            
-            int index = profile.GetIndexPrivilege(m_permission, m_table);
-
-            if (index != -1)
+            if (database.CanDo("", ""))
             {
-                profile.DeletePrivilegeByIndex(index);
-                return Messages.SecurityPrivilegeRevoked;
+                Profile profile = database.GetProfile(m_user);
+
+                int index = profile.GetIndexPrivilege(m_permission, m_table);
+
+                if (index != -1)
+                {
+                    profile.DeletePrivilegeByIndex(index);
+                    return Messages.SecurityPrivilegeRevoked;
+                }
+                else
+                {
+                    return Messages.SecurityProfileDoesNotExist;
+                }
             }
             else
-            {
-                return Messages.SecurityProfileDoesNotExist;
-            }
+                return Messages.SecurityNotSufficientPrivileges;
         }
     }
 }
