@@ -24,17 +24,22 @@ namespace BostDB.MiniSqlParser
 
         public string Run(DataBase database)
         {
-            int index = database.GetIndexProfile(m_profile);
-
-            if(index != -1)
+            if (database.CanDo("", ""))
             {
-                database.DeleteProfileByIndex(index);
-                return Messages.SecurityProfileDeleted;
+                int index = database.GetIndexProfile(m_profile);
+
+                if (index != -1)
+                {
+                    database.DeleteProfileByIndex(index);
+                    return Messages.SecurityProfileDeleted;
+                }
+                else
+                {
+                    return Messages.SecurityProfileDoesNotExist;
+                }
             }
             else
-            {
-                return Messages.SecurityProfileDoesNotExist;
-            }
+                return Messages.SecurityNotSufficientPrivileges;
         }
     }
 }

@@ -56,53 +56,58 @@ namespace BostDB.MiniSqlParser
 
         public string Run(DataBase database) 
         {
-            List<Column> columns = new List<Column>();
-            Table tab = database.SearchTableByName(m_table);
-            List<Column> columns2 = new List<Column>();
-            List<string> names;
-            Column col;
-            if (tab != null)
+            if (database.CanDo("SELECT", m_table))
             {
-                List<Column> cols = tab.GetColumns();
-                if (m_column != "")
+                List<Column> columns = new List<Column>();
+                Table tab = database.SearchTableByName(m_table);
+                List<Column> columns2 = new List<Column>();
+                List<string> names;
+                Column col;
+                if (tab != null)
                 {
-                    names = new List<string>();
-                    List<int> indexes = tab.SelectCondition(m_column, m_operador, m_value);
-
-                    foreach (Column column in cols)
+                    List<Column> cols = tab.GetColumns();
+                    if (m_column != "")
                     {
-                        col = new Column(column.GetName()); //Create the column
-                        names = m_columnNames; //Add the name of the column to a List with names
-                        columns.Add(col); //Add column to a List of columns
-                        
-                        foreach (int index in indexes)
+                        names = new List<string>();
+                        List<int> indexes = tab.SelectCondition(m_column, m_operador, m_value);
+
+                        foreach (Column column in cols)
                         {
-                            col.AddValue(column.GetValue(index));//Get value of the of the index
+                            col = new Column(column.GetName()); //Create the column
+                            names = m_columnNames; //Add the name of the column to a List with names
+                            columns.Add(col); //Add column to a List of columns
+
+                            foreach (int index in indexes)
+                            {
+                                col.AddValue(column.GetValue(index));//Get value of the of the index
+                            }
                         }
                     }
+                    else
+                    {
+                        names = m_columnNames;
+                        columns = tab.GetColumns();
+                    }
+
+                    Table table = new Table("Table");//Create a new table
+                    foreach (Column column1 in columns) //Add columns to the table
+                    {
+                        table.AddColumn(column1);
+                    }
+
+                    foreach (string column in names)
+                        columns2.Add(table.SearchColumnByName(column));
+
+                    table = table.Select(columns2);
+
+                    return table.ToString();
+
                 }
                 else
-                {
-                    names = m_columnNames;
-                    columns = tab.GetColumns();
-                }
-
-                Table table = new Table("Table");//Create a new table
-                foreach(Column column1 in columns) //Add columns to the table
-                {
-                    table.AddColumn(column1);
-                }
-                
-                foreach (string column in names) 
-                    columns2.Add(table.SearchColumnByName(column));
-
-                table = table.Select(columns2);
-
-                return table.ToString();
-
+                    return Messages.TableDoesNotExist;
             }
             else
-                return Messages.TableDoesNotExist;
+                return Messages.SecurityNotSufficientPrivileges;
         }
     }
 }

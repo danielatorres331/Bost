@@ -17,7 +17,7 @@ namespace BostDB
         string pathString;
         List<User> Users = new List<User>(); // create the list empty
         private List<Profile> m_profiles; //Create an empty list of profiles
-
+        private User m_user; //The login user
 
         //Constructor
         public DataBase(String name, String userName, String password)
@@ -27,6 +27,8 @@ namespace BostDB
             Password = password;
             pathString = System.IO.Path.Combine(@"/Folder", name);
             m_profiles = new List<Profile>();
+            m_user = new User("admin", "admin", new Profile("admin"));
+            Users.Add(new User(userName, password, null));
         }
 
         //Delete a table
@@ -224,6 +226,38 @@ namespace BostDB
         {
             Users.RemoveAt(index);
 
+        }
+
+        public void SetUser(User user)
+        {
+            m_user = user;
+        }
+
+        public User GetUser()
+        {
+            return m_user;
+        }
+
+        public List<User> GetUsers()
+        {
+            return Users;
+        }
+
+        public bool CanDo(string privilege, string table)
+        {
+            bool can = false;
+            if (m_user.GetUser() == "admin")
+            {
+                can = true;
+            }
+            else
+            {
+                Privilege privileges = m_user.GetProfile().GetPrivileges().Find(priv=>priv.GetPrivilege() == privilege && priv.GetTable() == table);
+                if (privileges != null) {
+                        can = true;
+                }
+            }
+            return can;
         }
     }
 }

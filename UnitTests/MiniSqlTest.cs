@@ -3,7 +3,7 @@ using System;
 using BostDB;
 using BostDB.MiniSqlParser;
 using System.Collections.Generic;
-using BostDB.MiniSqlParser;
+
 
 namespace UnitTests
 {
@@ -187,7 +187,7 @@ namespace UnitTests
 
             Assert.IsTrue(query is CreateSecurityProfile);
 
-            Assert.AreEqual("Student", (query as CreateSecurityProfile).GetUser());
+            Assert.AreEqual("Student", (query as CreateSecurityProfile).GetProfile());
         }
 
         [TestMethod]

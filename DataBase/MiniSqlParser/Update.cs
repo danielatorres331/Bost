@@ -23,34 +23,39 @@ namespace BostDB.MiniSqlParser
             m_valuesToUpdate = valuesToUpdate;
         }
 
-        public string Run(BostDB.DataBase database)
+        public string Run(DataBase database)
         {
-            BostDB.Table table = database.SearchTableByName(m_table);
-            List<int> indexes = new List<int>();
-            if (table != null)
+            if (database.CanDo("UPDATE", m_table))
             {
-                //Find the indexes where we want to update
-                for (int i = 0; i < m_columnsNamesToUpdate.Count; i++)
+                BostDB.Table table = database.SearchTableByName(m_table);
+                List<int> indexes = new List<int>();
+                if (table != null)
                 {
-                    BostDB.Column column = table.SearchColumnByName(m_columnsNamesToUpdate[i]);
-                    indexes = column.GetIndexes(m_valuesToUpdate[i]);
-                }
-
-                //find columns where we want to update
-                for (int i = 0; i < m_columns.Count; i++)
-                {
-                    BostDB.Column column = table.SearchColumnByName(m_columns[i]);
-                    //Set the new values in the indexes
-                    for (int j = 0; j < indexes.Count; j++)
+                    //Find the indexes where we want to update
+                    for (int i = 0; i < m_columnsNamesToUpdate.Count; i++)
                     {
-                        column.SetValue(indexes[j], m_newValues[i]);
+                        BostDB.Column column = table.SearchColumnByName(m_columnsNamesToUpdate[i]);
+                        indexes = column.GetIndexes(m_valuesToUpdate[i]);
                     }
-                }
 
-                return Messages.TupleUpdateSuccess;
+                    //find columns where we want to update
+                    for (int i = 0; i < m_columns.Count; i++)
+                    {
+                        BostDB.Column column = table.SearchColumnByName(m_columns[i]);
+                        //Set the new values in the indexes
+                        for (int j = 0; j < indexes.Count; j++)
+                        {
+                            column.SetValue(indexes[j], m_newValues[i]);
+                        }
+                    }
+
+                    return Messages.TupleUpdateSuccess;
+                }
+                else
+                    return Messages.TableDoesNotExist;
             }
             else
-                return Messages.TableDoesNotExist;
+                return Messages.SecurityNotSufficientPrivileges;
         }
 
         public string GetTable()
