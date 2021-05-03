@@ -38,6 +38,7 @@ steps:
     script: 'Bundler\bin\Release\netcoreapp3.1\Bundler.exe' 
 
 - task: GitHubRelease@1
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
   inputs:
     gitHubConnection: 'BostDB'
     repositoryName: '$(Build.Repository.Name)'
