@@ -18,20 +18,20 @@ namespace Bundler
             List<string> files = new List<string>();
             string version;
 
-            string relPathToSolutionRootFolder = "../../../"; //relative path from Bundler.exe to the solution root folder 
-            string mainExe = relPathToSolutionRootFolder + "ConsoleApp/bin/Release/ConsoleApp.exe";
-            string dbManagerDll = relPathToSolutionRootFolder + "MiniSQL/bin/Release/MiniSQL.dll";
+            string relPathToSolutionRootFolder = "../../../../"; //relative path from Bundler.exe to the solution root folder 
+            string mainExe = relPathToSolutionRootFolder + "Console/bin/Release/netcoreapp3.1/Console.dll";
+            string dbManagerDll = relPathToSolutionRootFolder + "DataBase/bin/Release/DataBase.dll";
 
             version = GetVersion(mainExe);
             if (version == null)
                 return;
 
-            string rootFolderInZip = "OurProject/"; //name of the folder created inside the zip file
+            string rootFolderInZip = "BostDB/"; //name of the folder created inside the zip file
 
             files.Add(mainExe);
             files.Add(dbManagerDll);
 
-            string outputFile = relPathToSolutionRootFolder + "OurProject-" + version + ".zip"; //name of the output zip file
+            string outputFile = relPathToSolutionRootFolder + "BostDB-" + version + ".zip"; //name of the output zip file
 
             Console.WriteLine("Compressing files");
             Compress(outputFile, files, rootFolderInZip, relPathToSolutionRootFolder);
