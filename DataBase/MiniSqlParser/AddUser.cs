@@ -15,9 +15,9 @@ namespace BostDB.MiniSqlParser
         private string m_profileName;
         public AddUser(string user, string password, string profileName)
         {
-            m_user = user;
-            m_password = password;
-            m_profileName = profileName;
+            m_user = user.Replace("'", "");
+            m_password = password.Replace("'", "");
+            m_profileName = profileName.Replace("'", "");
         }
         public string GetUser()
         {
@@ -34,9 +34,14 @@ namespace BostDB.MiniSqlParser
        
         public string Run(DataBase database)
         {
-            database.AddUser(new User(m_user, m_password, database.GetProfile(m_profileName)));
+            if (database.CanDo("", ""))
+            {
+                database.AddUser(new User(m_user, m_password, database.GetProfile(m_profileName)));
 
-            return Messages.SecurityUserAdded;
+                return Messages.SecurityUserAdded;
+            }
+            else
+                return Messages.SecurityNotSufficientPrivileges;
 
         }
     }

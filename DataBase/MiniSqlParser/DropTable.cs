@@ -24,17 +24,22 @@ namespace BostDB.MiniSqlParser
 
         public string Run(DataBase database)
         {
-            Table t = database.SearchTableByName(m_table);
-
-            if(t == null)
+            if (database.CanDo("", ""))
             {
-                return Messages.TableDoesNotExist;
+                Table t = database.SearchTableByName(m_table);
+
+                if (t == null)
+                {
+                    return Messages.TableDoesNotExist;
+                }
+                else
+                {
+                    database.DropTable(t);
+                    return Messages.DeleteTableSuccess;
+                }
             }
             else
-            {
-                database.DropTable(t);
-                return Messages.DeleteTableSuccess;
-            }
+                return Messages.SecurityNotSufficientPrivileges;
         }
     }
 }

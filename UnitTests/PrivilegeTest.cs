@@ -9,6 +9,7 @@ namespace UnitTests
     {
         private Privilege m_privilege;
         private Privilege m_privilege2;
+        private Privilege m_privilege3;
 
         public PrivilegeTest()
         {
@@ -21,6 +22,7 @@ namespace UnitTests
         {
             Assert.IsNotNull(m_privilege);
             Assert.IsNotNull(m_privilege2);
+            Assert.IsNull(m_privilege3);
         }
 
         [TestMethod]

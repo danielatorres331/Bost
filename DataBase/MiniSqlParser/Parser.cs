@@ -19,7 +19,6 @@ namespace BostDB.MiniSqlParser
             const string updatePattern = @"UPDATE ([a-zA-Z0-9]+) SET ([^\s]+) WHERE ([^\s]+);";
             const string dropTablePattern = @"DROP TABLE ([a-zA-Z0-9]+);";
             const string createTablePattern = @"CREATE TABLE (([a-zA-Z0-9]+)) (\((([^\s]+) (TEXT|INT|DOUBLE),?)+\));";
-            const string createDataBasePattern = @"([a-zA-Z0-9]+),([a-zA-Z0-9]+),([a-zA-Z0-9]+)";
             const string createSecurityProfilePattern = @"CREATE SECURITY PROFILE ([a-zA-Z0-9]+);";
             const string grantPattern = @"GRANT (SELECT|UPDATE|DELETE|INSERT) ON ([a-zA-Z0-9]+) TO ([a-zA-Z0-9]+);";
             const string addUserPattern = @"ADD USER \((([a-zA-Z0-9']+),([a-zA-Z0-9']+),([a-zA-Z0-9']+))\);";

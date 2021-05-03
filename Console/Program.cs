@@ -62,6 +62,7 @@ namespace Console
                     {
                         if(db.GetName() == databaseString[0])
                         {
+                            dataBase = db;
                             exist = true;
                             break;
                         }
@@ -69,7 +70,24 @@ namespace Console
 
                     if (exist)
                     {
-                        System.Console.WriteLine(Messages.OpenDatabaseSuccess);
+                        List<User> users = dataBase.GetUsers();
+
+                        exist = false;
+
+                        for(int j = 0; j < users.Count; j++)
+                        {
+                            if(users[j].GetUser() == databaseString[1] && users[j].GetPassword() == databaseString[2])
+                            {
+                                dataBase.SetUser(users[j]);
+                                exist = true;
+                                System.Console.WriteLine(Messages.OpenDatabaseSuccess);
+                                break;
+                            }
+                            else if(j == users.Count - 1)
+                            {
+                                System.Console.WriteLine(Messages.SecurityIncorrectLogin);
+                            }
+                        }
                     }
                     else
                     {
@@ -85,10 +103,6 @@ namespace Console
             }
             System.Console.WriteLine("TOTAL TIME: " + time.ToString("0.0000 ms"));
             stopwatch.Stop();
-      
-        
-            
-        
         }
     }
 }

@@ -42,35 +42,39 @@ namespace BostDB.MiniSqlParser
        
         public string Run(DataBase database)
         {
-            Table t = database.SearchTableByName(m_table);
+            if (database.CanDo("DELETE", m_table))
+            {
+                Table t = database.SearchTableByName(m_table);
 
-            if (t == null)
-            {
-                return Messages.TableDoesNotExist;
-            }
-            else
-            {
-                
-                Column c = t.SearchColumnByName(m_column);
-                
-                if (c == null) 
+                if (t == null)
                 {
-                    return Messages.ColumnDoesNotExist;
+                    return Messages.TableDoesNotExist;
                 }
                 else
                 {
-                    List<int> index = t.SelectCondition(m_column, m_operator, m_value);
-                    List<Column> columns = t.GetColumns();
-                    foreach (int i in index)
-                {
-                    foreach (Column column in columns)
-                        column.DeleteValue(i);
+
+                    Column c = t.SearchColumnByName(m_column);
+
+                    if (c == null)
+                    {
+                        return Messages.ColumnDoesNotExist;
+                    }
+                    else
+                    {
+                        List<int> index = t.SelectCondition(m_column, m_operator, m_value);
+                        List<Column> columns = t.GetColumns();
+                        foreach (int i in index)
+                        {
+                            foreach (Column column in columns)
+                                column.DeleteValue(i);
+                        }
+                        return Messages.TupleDeleteSuccess;
+                    }
+
                 }
-                return Messages.TupleDeleteSuccess;
-                }
-               
             }
-            
+            else
+                return Messages.SecurityNotSufficientPrivileges;
         }
     }
 }

@@ -28,8 +28,10 @@ namespace UnitTests
         {
             string value1 = ValuesList.GetValue(0);
             string value2 =ValuesList.GetValue(1);
+            string value3 = ValuesList.GetValue(2);
             Assert.AreEqual(value1, "value1");
             Assert.AreEqual(value2, "value2");
+            Assert.AreEqual(value3, "value3");
         }
 
         [TestMethod]
@@ -69,6 +71,7 @@ namespace UnitTests
         {
             Assert.AreEqual(0, ValuesList.GetIndex("value1"));
             Assert.AreEqual(1, ValuesList.GetIndex("value2"));
+            Assert.AreEqual(2, ValuesList.GetIndex("value3"));
         }
     }
 }
