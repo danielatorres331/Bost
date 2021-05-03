@@ -49,3 +49,4 @@ steps:
     title: 'BostDB release'
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
+    assets : '*.zip'
