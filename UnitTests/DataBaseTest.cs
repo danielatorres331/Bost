@@ -29,8 +29,11 @@ namespace UnitTests
         {
             DataBase db3 = new DataBase("DataBase3", "Bost", "contraseña");
             Table table2 = new Table("Table2");
+            Table table3 = new Table("Table3");
             db3.AddTable(table2);
+            db3.AddTable(table3);
             Assert.AreEqual(table2 , db3.SearchTableByName("Table2"));
+            Assert.AreEqual(table3, db3.SearchTableByName("Table3"));
 
         }
 
