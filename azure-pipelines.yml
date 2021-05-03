@@ -5,7 +5,7 @@
 
 trigger:
 - master
-- develop
+
 
 pool:
   vmImage: 'windows-latest'
@@ -35,5 +35,14 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: 'Bundler\bin\Release\Bundler.exe' 
+    script: 'Bundler\bin\Release\netcoreapp3.1\Bundler.exe' 
 
+- task: GitHubRelease@1
+  inputs:
+    gitHubConnection: 'BostDB'
+    repositoryName: '$(Build.Repository.Name)'
+    action: 'edit'
+    target: '$(Build.SourceVersion)'
+    tag: 'v1.0'
+    changeLogCompareToRelease: 'lastFullRelease'
+    changeLogType: 'commitBased'
