@@ -45,7 +45,7 @@ steps:
     action: 'edit'
     target: '$(Build.SourceVersion)'
     tagSource: 'userSpecifiedTag'
-    tag: 'v1.0'
+    tag: 'v1.1'
     title: 'BostDB release'
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
