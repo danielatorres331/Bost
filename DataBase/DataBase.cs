@@ -246,15 +246,20 @@ namespace BostDB
         public bool CanDo(string privilege, string table)
         {
             bool can = false;
+
             if (m_user.GetUser() == "admin")
             {
                 can = true;
             }
             else
             {
-                Privilege privileges = m_user.GetProfile().GetPrivileges().Find(priv=>priv.GetPrivilege() == privilege && priv.GetTable() == table);
-                if (privileges != null) {
+                if (m_profiles.Find(prof => prof.GetName() == m_user.GetProfile().GetName()) != null)
+                { 
+                    Privilege privileges = m_user.GetProfile().GetPrivileges().Find(priv => priv.GetPrivilege() == privilege && priv.GetTable() == table);
+                    if (privileges != null)
+                    {
                         can = true;
+                    }
                 }
             }
             return can;
