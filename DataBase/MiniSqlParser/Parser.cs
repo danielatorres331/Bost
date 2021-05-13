@@ -14,7 +14,7 @@ namespace BostDB.MiniSqlParser
         {
             const string selectAllPattern = @"SELECT \* FROM ([a-zA-Z0-9]+)(;| WHERE ([a-zA-Z0-9.]+)([<>=]{1,2})([a-zA-Z0-9.]+);)";
             const string selectColumnsPattern = @"SELECT (([a-zA-Z0-9]+)((,[a-zA-Z0-9]+){0,})) FROM ([a-zA-Z0-9]+)(;| WHERE ([a-zA-Z0-9.]+)([<>=]{1,2})(([a-zA-Z0-9.]+)|'([a-zA-Z0-9.]+)');)";
-            const string deletePattern = @"DELETE FROM ([a-zA-Z0-9.]+) WHERE ([a-zA-Z0-9.]+)([<>=]{1,2})([a-zA-Z0-9.]+);";
+            const string deletePattern = @"DELETE FROM ([a-zA-Z0-9.]+) WHERE ([a-zA-Z0-9.]+)([<>=]{1,2})([a-zA-Z0-9.']+);";
             const string insertPattern = @"INSERT INTO ([a-zA-Z0-9]+) VALUES \(([^\)]+)\);";
             const string updatePattern = @"UPDATE ([a-zA-Z0-9]+) SET ([^\s]+) WHERE ([^\s]+);";
             const string dropTablePattern = @"DROP TABLE ([a-zA-Z0-9]+);";
